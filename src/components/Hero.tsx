@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { NetworkHealthRing } from "./NetworkHealthRing";
 import { MagneticButton } from "./MagneticButton";
 import { GlassButton } from "./GlassButton";
 import { TextScramble } from "./TextScramble";
@@ -32,11 +31,24 @@ export function Hero() {
       ref={containerRef}
       className="relative min-h-[100dvh] flex items-end pt-32 md:pt-40 pb-16 md:pb-28 overflow-hidden"
     >
+      {/* Subtle indigo gradient glow behind the headline — 12% opacity */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: "20%",
+          left: "0",
+          width: "70%",
+          height: "60%",
+          background: "var(--gradient-brand)",
+          opacity: 0.12,
+          filter: "blur(120px)",
+        }}
+      />
       <div
         className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(26,26,28,1) 1px, transparent 1px), linear-gradient(90deg, rgba(26,26,28,1) 1px, transparent 1px)",
+            "linear-gradient(var(--color-text-primary) 1px, transparent 1px), linear-gradient(90deg, var(--color-text-primary) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
         }}
       />
@@ -54,7 +66,7 @@ export function Hero() {
               className="mb-6"
             >
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-text-primary/[0.04] border border-text-primary/10">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-gold animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-accent animate-pulse" />
                 <TextScramble
                   text={heroContent.eyebrow}
                   className="text-[11px] font-semibold text-text-secondary uppercase tracking-[0.15em]"
@@ -77,7 +89,7 @@ export function Hero() {
                   className="text-[48px] sm:text-[64px] md:text-[72px] lg:text-[80px] font-bold leading-[1.1] tracking-[-0.03em] pb-[0.05em] break-words"
                 >
                   {i === heroContent.headline.length - 1 ? (
-                    <span className="text-accent-gold">{line}</span>
+                    <span className="text-indigo-mid">{line}</span>
                   ) : (
                     <span className="text-text-primary">{line}</span>
                   )}
@@ -122,14 +134,6 @@ export function Hero() {
             </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] as const }}
-            className="lg:col-span-5 flex justify-center lg:justify-end"
-          >
-            <NetworkHealthRing />
-          </motion.div>
         </div>
 
         <motion.div

@@ -4,23 +4,28 @@ import { motion } from "framer-motion";
 interface MagneticButtonProps {
   children: React.ReactNode;
   className?: string;
-  onClick?: () => void;
   strength?: number;
   href?: string;
   target?: string;
   rel?: string;
 }
 
+/**
+ * Wraps children in a magnetic pointer-following effect.
+ * - When `href` is provided: renders motion.a (anchor semantics).
+ * - Otherwise: renders motion.div (no implicit button semantics).
+ *   The child is expected to be the actual interactive element (e.g., a GlassButton).
+ *   This avoids invalid <button> inside <button> HTML.
+ */
 export function MagneticButton({
   children,
   className = "",
-  onClick,
   strength = 0.3,
   href,
   target,
   rel,
 }: MagneticButtonProps) {
-  const ref = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+  const ref = useRef<HTMLAnchorElement | HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -37,27 +42,39 @@ export function MagneticButton({
     setPosition({ x: 0, y: 0 });
   };
 
-  const Component = href ? motion.a : motion.button;
+  const sharedProps = {
+    onMouseMove: handleMouseMove,
+    onMouseLeave: handleMouseLeave,
+    animate: { x: position.x, y: position.y },
+    transition: {
+      type: "spring" as const,
+      stiffness: 350,
+      damping: 15,
+      mass: 0.5,
+    },
+    className,
+  };
+
+  if (href) {
+    return (
+      <motion.a
+        ref={ref as React.RefObject<HTMLAnchorElement>}
+        href={href}
+        target={target}
+        rel={rel}
+        {...sharedProps}
+      >
+        {children}
+      </motion.a>
+    );
+  }
 
   return (
-    <Component
-      ref={ref as any}
-      href={href}
-      target={target}
-      rel={rel}
-      onClick={onClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      animate={{ x: position.x, y: position.y }}
-      transition={{
-        type: "spring",
-        stiffness: 350,
-        damping: 15,
-        mass: 0.5,
-      }}
-      className={className}
+    <motion.div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      {...sharedProps}
     >
       {children}
-    </Component>
+    </motion.div>
   );
 }

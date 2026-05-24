@@ -17,12 +17,11 @@ import {
   Package,
   LifeBuoy,
 } from "lucide-react";
-import { AnimatedSection, StaggerContainer, StaggerItem } from "./AnimatedSection";
+import { StaggerContainer, StaggerItem } from "./AnimatedSection";
 import { BreathingHeadline } from "./BreathingText";
 import { MagneticButton } from "./MagneticButton";
 import { GlassButton } from "./GlassButton";
 import { ImageReveal } from "./ImageReveal";
-import { TextScramble } from "./TextScramble";
 import { mainServices, detailedServices } from "../data/siteData";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -211,9 +210,6 @@ export function Services() {
     <section id="services" className="py-20 md:py-28 overflow-x-hidden">
       <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
         <div ref={headerRef} className="mb-14 md:mb-20">
-          <p className="gsap-reveal text-[11px] font-medium text-accent-gold uppercase tracking-[0.2em] mb-4">
-            <TextScramble text="What We Do" trigger="inview" duration={600} />
-          </p>
           <div className="gsap-reveal">
             <BreathingHeadline className="text-[32px] md:text-[48px] lg:text-[56px] text-text-primary leading-[1.05] tracking-[-0.02em] max-w-[700px]">
               Three pillars of enterprise technology excellence.
@@ -228,14 +224,11 @@ export function Services() {
         </div>
 
         <div className="mt-20 md:mt-28">
-          <AnimatedSection className="mb-12">
-            <p className="text-[11px] font-medium text-accent-gold uppercase tracking-[0.2em] mb-4">
-              Specialized Solutions
-            </p>
+          <div className="mb-12">
             <h2 className="text-[28px] md:text-[36px] font-bold text-text-primary leading-[1.1] tracking-[-0.01em]">
               Tailored for your environment.
             </h2>
-          </AnimatedSection>
+          </div>
 
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {detailedServices.map((service) => {
@@ -243,15 +236,15 @@ export function Services() {
               return (
                 <StaggerItem key={service.title}>
                   <motion.div
-                    className="group flex items-center gap-5 md:gap-8 bg-bg-pure rounded-2xl border border-border p-7 md:p-8 transition-all duration-500 hover:border-accent-gold/30 hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.06)]"
+                    className="group flex items-center gap-5 md:gap-8 bg-bg-pure rounded-2xl border border-border p-7 md:p-8 transition-colors duration-300 ease-out hover:border-indigo-accent/30 hover:shadow-[0_8px_30px_-10px_rgba(25,22,45,0.08)]"
                     whileHover={{ x: 4 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className="w-12 h-12 rounded-xl bg-bg flex items-center justify-center shrink-0 transition-colors duration-500 group-hover:bg-accent-gold/10">
+                    <div className="w-12 h-12 rounded-xl bg-bg flex items-center justify-center shrink-0 transition-colors duration-300 ease-out group-hover:bg-indigo-mid/10">
                       {Icon && (
                         <Icon
                           size={22}
-                          className="text-text-secondary transition-colors duration-500 group-hover:text-accent-gold"
+                          className="text-text-secondary transition-colors duration-300 ease-out group-hover:text-indigo-mid"
                           strokeWidth={1.5}
                         />
                       )}
@@ -269,7 +262,7 @@ export function Services() {
                     </div>
                     <ArrowRight
                       size={18}
-                      className="hidden md:block text-text-muted/30 group-hover:text-accent-gold group-hover:translate-x-1 transition-all duration-300 shrink-0"
+                      className="hidden md:block text-text-muted/30 group-hover:text-indigo-mid group-hover:translate-x-1 transition-colors duration-300 ease-out shrink-0"
                     />
                   </motion.div>
                 </StaggerItem>

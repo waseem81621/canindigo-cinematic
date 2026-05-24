@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Play, Pause, Sparkles, Volume2, VolumeX } from "lucide-react";
-import { AnimatedSection } from "./AnimatedSection";
 import { shuaaContent } from "../data/siteData";
 
 function FloatingParticle({ delay, x, duration }: { delay: number; x: string; duration: number }) {
   return (
     <motion.div
-      className="absolute w-1 h-1 rounded-full bg-accent-gold/40"
+      className="absolute w-1 h-1 rounded-full bg-indigo-light/40"
       style={{ left: x, bottom: "20%" }}
       animate={{
         y: [0, -120, -200],
@@ -38,7 +37,7 @@ function DataNode({ x, y, delay }: { x: string; y: string; delay: number }) {
         ease: "easeInOut",
       }}
     >
-      <div className="w-1.5 h-1.5 rounded-full bg-accent-gold/70" />
+      <div className="w-1.5 h-1.5 rounded-full bg-indigo-light/70" />
       <div className="w-12 h-1 rounded-full bg-white/20" />
       <div className="w-6 h-1 rounded-full bg-white/10" />
     </motion.div>
@@ -93,9 +92,9 @@ export function ShuaaProgram() {
       />
 
       <div className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
-        <AnimatedSection className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-            <Sparkles size={14} className="text-accent-gold" />
+            <Sparkles size={14} className="text-indigo-accent" />
             <span className="text-[11px] font-semibold text-white/50 uppercase tracking-[0.15em]">
               {shuaaContent.badge}
             </span>
@@ -106,21 +105,20 @@ export function ShuaaProgram() {
           <p className="mt-4 text-[15px] md:text-[17px] text-white/40 max-w-[520px] mx-auto leading-relaxed">
             {shuaaContent.subheadline}
           </p>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection delay={0.2}>
+        <div>
           <div className="relative mx-auto max-w-[900px]">
-            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[70%] h-32 bg-accent-gold/15 blur-[80px] rounded-full" />
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[50%] h-20 bg-accent-teal/10 blur-[60px] rounded-full" />
+            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[70%] h-32 bg-indigo-mid/15 blur-[80px] rounded-full" />
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[50%] h-20 bg-indigo-light/10 blur-[60px] rounded-full" />
 
             <motion.div
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="relative"
             >
-              <div className="relative rounded-2xl md:rounded-3xl bg-[#1C1C1E] p-2 md:p-3 shadow-2xl">
-                <div className="relative rounded-xl md:rounded-2xl overflow-hidden bg-black">
-                  <div className="relative aspect-video overflow-hidden">
+              <div className="relative rounded-xl md:rounded-2xl overflow-hidden bg-black border border-white/10 shadow-2xl">
+                <div className="relative aspect-video overflow-hidden">
                     <video
                       ref={videoRef}
                       src={shuaaContent.videoUrl}
@@ -203,45 +201,12 @@ export function ShuaaProgram() {
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <div className="absolute top-0 left-8 right-8 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-              </div>
-
-              <div className="flex justify-center">
-                <div className="w-24 md:w-32 h-10 md:h-14 bg-gradient-to-b from-[#2a2a2c] to-[#1a1a1c] relative">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-                </div>
-              </div>
-
-              <div className="flex justify-center">
-                <div className="relative">
-                  <div className="w-48 md:w-64 h-4 md:h-5 rounded-full bg-gradient-to-b from-[#2a2a2c] to-[#151517] shadow-lg relative overflow-hidden">
-                    <motion.div
-                      className="absolute top-0 left-1/2 -translate-x-1/2 h-[2px] rounded-full"
-                      style={{
-                        width: "60%",
-                        background: "linear-gradient(90deg, transparent, var(--color-indigo-mid), var(--color-indigo-light), transparent)",
-                      }}
-                      animate={{ opacity: [0.4, 0.9, 0.4] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    />
-                  </div>
-                  <motion.div
-                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[80%] h-6 rounded-full blur-md"
-                    style={{
-                      background: "linear-gradient(90deg, color-mix(in srgb, var(--color-indigo-mid) 12%, transparent), color-mix(in srgb, var(--color-indigo-light) 12%, transparent), color-mix(in srgb, var(--color-indigo-mid) 12%, transparent))",
-                    }}
-                    animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                </div>
               </div>
             </motion.div>
           </div>
-        </AnimatedSection>
+        </div>
 
-        <AnimatedSection delay={0.4}>
+        <div>
           <div className="mt-14 md:mt-20 max-w-[720px] mx-auto text-center">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
               {shuaaContent.stats.map((stat, i) => (
@@ -275,7 +240,7 @@ export function ShuaaProgram() {
               </div>
             </div>
           </div>
-        </AnimatedSection>
+        </div>
       </div>
     </section>
   );

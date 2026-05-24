@@ -50,7 +50,7 @@ export function Navbar() {
               <img
                 src={brand.logo}
                 alt={brand.name}
-                className="h-16 md:h-20 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                className="h-16 md:h-20 w-auto object-contain transition-opacity duration-200 ease-out group-hover:opacity-80"
               />
             </a>
 
@@ -71,7 +71,7 @@ export function Navbar() {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => scrollTo("#contact")}
-                className="hidden md:inline-flex items-center px-5 py-2 text-[13px] font-medium text-text-primary border border-border rounded-full hover:border-accent-gold hover:bg-accent-gold/5 transition-all duration-300"
+                className="hidden md:inline-flex items-center px-5 py-2 text-[13px] font-medium text-text-primary border border-border rounded-full hover:border-indigo-mid hover:bg-indigo-mid/5 transition-colors duration-200 ease-out"
               >
                 Consultation
               </button>
@@ -115,7 +115,7 @@ export function Navbar() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
                 onClick={() => scrollTo("#contact")}
-                className="mt-6 w-full py-3 text-center text-sm font-medium text-text-primary border border-accent-gold rounded-full"
+                className="mt-6 w-full py-3 text-center text-sm font-medium text-text-primary border border-indigo-mid rounded-full"
               >
                 Request Consultation
               </motion.button>

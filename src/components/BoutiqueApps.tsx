@@ -10,7 +10,7 @@ import {
   ArrowUpRight,
   ExternalLink,
 } from "lucide-react";
-import { AnimatedSection, StaggerContainer, StaggerItem } from "./AnimatedSection";
+import { StaggerContainer, StaggerItem } from "./AnimatedSection";
 import { TiltCard } from "./TiltCard";
 import { boutiqueApps } from "../data/siteData";
 
@@ -89,7 +89,7 @@ function AppCard({ app }: { app: (typeof boutiqueApps)[0] }) {
 
   return (
     <TiltCard
-      className={`group relative block rounded-2xl overflow-hidden transition-all duration-500
+      className={`group relative block rounded-2xl overflow-hidden transition-colors duration-300 ease-out
         ${isLarge ? "md:row-span-2" : ""}
         ${isWide ? "md:col-span-2" : ""}
       `}
@@ -109,7 +109,7 @@ function AppCard({ app }: { app: (typeof boutiqueApps)[0] }) {
         <div
           className={`relative h-full min-h-[200px] md:min-h-[220px] p-6 md:p-8 flex flex-col justify-between
             bg-white/60 backdrop-blur-xl border border-white/40
-            transition-all duration-500
+            transition-colors duration-300 ease-out
             ${isComingSoon ? "" : "group-hover:bg-white/75 group-hover:border-white/60 group-hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.12)]"}`}
           style={{
             boxShadow: hovered && !isComingSoon
@@ -127,7 +127,7 @@ function AppCard({ app }: { app: (typeof boutiqueApps)[0] }) {
           <div className="relative z-10">
             <div className="flex items-start justify-between mb-4">
               <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-500
+                className="w-11 h-11 rounded-xl flex items-center justify-center transition-colors duration-300 ease-out
                   bg-text-primary/5 group-hover:shadow-lg"
                 style={{
                   boxShadow: hovered
@@ -176,7 +176,7 @@ function AppCard({ app }: { app: (typeof boutiqueApps)[0] }) {
 
           <div className="relative z-10 mt-4">
             <p
-              className={`text-text-secondary leading-relaxed mb-5 transition-all duration-500
+              className={`text-text-secondary leading-relaxed mb-5 transition-colors duration-300 ease-out
                 ${isLarge ? "text-[15px] max-w-[320px]" : "text-[14px]"}
                 ${isWide ? "max-w-[500px]" : "max-w-[280px]"}`}
             >
@@ -186,7 +186,7 @@ function AppCard({ app }: { app: (typeof boutiqueApps)[0] }) {
             <div className="flex items-center gap-2">
               <span
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[12px] font-semibold
-                  border transition-all duration-500"
+                  border transition-colors duration-300 ease-out"
                 style={{
                   borderColor:
                     hovered && !isComingSoon ? app.accent : "var(--color-border)",
@@ -242,10 +242,7 @@ export function BoutiqueApps() {
       />
 
       <div className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
-        <AnimatedSection className="mb-12 md:mb-16">
-          <p className="text-[11px] font-medium text-accent-gold uppercase tracking-[0.2em] mb-4">
-            Product Suite
-          </p>
+        <div className="mb-12 md:mb-16">
           <h2 className="text-[32px] md:text-[42px] lg:text-[48px] font-semibold text-text-primary leading-[1.1] tracking-[-0.01em] max-w-[700px]">
             Boutique apps built for Omani enterprise.
           </h2>
@@ -253,7 +250,7 @@ export function BoutiqueApps() {
             Six production-ready platforms. Each crafted for a specific
             operational need — deployed, maintained, and supported by our team.
           </p>
-        </AnimatedSection>
+        </div>
 
         <StaggerContainer
           className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-5"

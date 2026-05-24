@@ -234,9 +234,6 @@ export const caseStudies = [
       "Achieved 99.99% uptime across all locations with seamless roaming and centralized policy management.",
     metric: "99.99%",
     metricLabel: "Uptime across 47 sites",
-    quote:
-      "CanIndigo delivered what our previous three vendors could not — a network that simply works, everywhere.",
-    quoteAuthor: "IT Director, Shell Oman",
     image: "/images/case-shell.jpg",
     accentColor: "var(--color-indigo-mid)",
   },
@@ -254,9 +251,6 @@ export const caseStudies = [
       "Reduced mean time to detect threats by 87% and achieved full CBO compliance certification.",
     metric: "87%",
     metricLabel: "Faster threat detection",
-    quote:
-      "Their team thinks like bankers and engineers simultaneously. That dual fluency is rare.",
-    quoteAuthor: "CISO, Bank Dhofar",
     image: "/images/case-bank.jpg",
     accentColor: "var(--color-indigo-mid)",
   },
@@ -274,9 +268,6 @@ export const caseStudies = [
       "Reduced report generation time from weeks to hours and enabled real-time dashboard visibility for leadership.",
     metric: "Weeks → Hours",
     metricLabel: "Report generation time",
-    quote:
-      "CanIndigo brought Canadian technical discipline with deep respect for our institutional context.",
-    quoteAuthor: "Director of IT, Ministry of Energy",
     image: "/images/case-ministry.jpg",
     accentColor: "var(--color-indigo-mid)",
   },
@@ -294,9 +285,6 @@ export const caseStudies = [
       "Maintained 99.95% infrastructure availability with zero unplanned outages over 18 months.",
     metric: "Zero",
     metricLabel: "Unplanned outages in 18mo",
-    quote:
-      "They operate with the precision and reliability we demand from our own teams.",
-    quoteAuthor: "Head of Network Operations, Omantel",
     image: "/images/case-omantel.jpg",
     accentColor: "var(--color-indigo-mid)",
   },

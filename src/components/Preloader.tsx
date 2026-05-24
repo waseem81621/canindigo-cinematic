@@ -65,7 +65,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
           {/* Progress bar */}
           <div className="w-48 h-[1px] bg-border rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-accent-gold rounded-full"
+              className="h-full bg-indigo-mid rounded-full"
               style={{ width: `${progress}%` }}
               transition={{ duration: 0.1 }}
             />

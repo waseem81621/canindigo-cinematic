@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { X, Quote, ArrowUpRight, TrendingUp } from "lucide-react";
-import { AnimatedSection, StaggerContainer, StaggerItem } from "./AnimatedSection";
+import { X, ArrowUpRight, TrendingUp } from "lucide-react";
+import { StaggerContainer, StaggerItem } from "./AnimatedSection";
 import { TiltCard } from "./TiltCard";
 import { caseStudies } from "../data/siteData";
 
@@ -87,7 +87,7 @@ function CaseStudyModal({
                 transition={{ delay: 0.4 + i * 0.1 }}
                 className="p-5 rounded-2xl bg-bg border border-border/60"
               >
-                <p className="text-[10px] font-bold text-accent-gold uppercase tracking-[0.15em] mb-2">
+                <p className="text-[10px] font-bold text-indigo-accent uppercase tracking-[0.15em] mb-2">
                   {item.label}
                 </p>
                 <p className="text-[14px] text-text-secondary leading-relaxed">
@@ -123,26 +123,6 @@ function CaseStudyModal({
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.75 }}
-            className="flex gap-5 p-6 rounded-2xl bg-bg border border-border/40"
-          >
-            <Quote
-              size={28}
-              className="text-accent-gold/25 shrink-0 mt-1"
-              strokeWidth={1.5}
-            />
-            <div>
-              <p className="text-lg md:text-xl text-text-primary font-light italic leading-relaxed">
-                &ldquo;{study.quote}&rdquo;
-              </p>
-              <p className="mt-4 text-[13px] font-semibold text-text-secondary">
-                {study.quoteAuthor}
-              </p>
-            </div>
-          </motion.div>
         </div>
       </motion.div>
     </motion.div>
@@ -295,14 +275,11 @@ export function CaseStudies() {
   return (
     <section id="case-studies" className="py-20 md:py-28 bg-bg-pure">
       <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
-        <AnimatedSection className="mb-12 md:mb-16">
-          <p className="text-[11px] font-medium text-accent-gold uppercase tracking-[0.2em] mb-4">
-            Case Studies
-          </p>
+        <div className="mb-12 md:mb-16">
           <h2 className="text-[32px] md:text-[42px] lg:text-[48px] font-semibold text-text-primary leading-[1.1] tracking-[-0.01em] max-w-[600px]">
             Proof without desperation.
           </h2>
-        </AnimatedSection>
+        </div>
 
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
           {caseStudies.map((study) => (

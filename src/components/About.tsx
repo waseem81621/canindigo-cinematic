@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { MapPin, Award, Users } from "lucide-react";
-import { AnimatedSection, StaggerContainer, StaggerItem } from "./AnimatedSection";
+import { StaggerContainer, StaggerItem } from "./AnimatedSection";
 import { TextReveal } from "./TextReveal";
 import { aboutContent } from "../data/siteData";
 
@@ -49,11 +49,6 @@ export function About() {
       <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
         {/* Header */}
         <div className="mb-14 md:mb-20">
-          <AnimatedSection>
-            <p className="text-[11px] font-medium text-accent-gold uppercase tracking-[0.2em] mb-4">
-              About Us
-            </p>
-          </AnimatedSection>
           <TextReveal
             className="text-[32px] md:text-[48px] lg:text-[56px] font-bold text-text-primary leading-[1.05] tracking-[-0.02em] max-w-[800px]"
             delay={0.1}
@@ -89,11 +84,11 @@ export function About() {
             </div>
           </motion.div>
 
-          <AnimatedSection delay={0.15}>
+          <div>
             <div className="bg-bg-pure rounded-2xl border border-border p-8 md:p-10">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 rounded-lg bg-accent-gold/10 flex items-center justify-center">
-                  <MapPin size={16} className="text-accent-gold" />
+                <div className="w-8 h-8 rounded-lg bg-indigo-mid/10 flex items-center justify-center">
+                  <MapPin size={16} className="text-indigo-mid" />
                 </div>
                 <span className="text-sm font-semibold text-text-primary">
                   Our Presence
@@ -112,8 +107,8 @@ export function About() {
 
               <div className="mt-8 pt-6 border-t border-border/50">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-accent-teal/10 flex items-center justify-center">
-                    <Award size={16} className="text-accent-teal" />
+                  <div className="w-8 h-8 rounded-lg bg-indigo-accent/10 flex items-center justify-center">
+                    <Award size={16} className="text-indigo-accent" />
                   </div>
                   <span className="text-sm font-semibold text-text-primary">
                     Certifications & Partnerships
@@ -131,34 +126,31 @@ export function About() {
                 </div>
               </div>
             </div>
-          </AnimatedSection>
+          </div>
         </div>
 
         {/* Team */}
-        <AnimatedSection className="mb-12">
-          <p className="text-[11px] font-medium text-accent-gold uppercase tracking-[0.2em] mb-4">
-            Our Team
-          </p>
+        <div className="mb-12">
           <h2 className="text-[28px] md:text-[36px] font-bold text-text-primary leading-[1.1] tracking-[-0.01em]">
             Built by people who care about the details.
           </h2>
-        </AnimatedSection>
+        </div>
 
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {aboutContent.team.map((member) => (
             <StaggerItem key={member.name}>
-              <div className="group bg-bg-pure rounded-2xl border border-border p-8 transition-all duration-500 hover:border-accent-gold/40 hover:shadow-[0_8px_30px_-10px_rgba(0,0,0,0.06)]">
-                <div className="w-10 h-10 rounded-lg bg-bg flex items-center justify-center mb-5 transition-colors duration-500 group-hover:bg-accent-gold/10">
+              <div className="group bg-bg-pure rounded-2xl border border-border p-8 transition-colors duration-300 ease-out hover:border-indigo-accent/40 hover:shadow-[0_8px_30px_-10px_rgba(25,22,45,0.08)]">
+                <div className="w-10 h-10 rounded-lg bg-bg flex items-center justify-center mb-5 transition-colors duration-300 ease-out group-hover:bg-indigo-mid/10">
                   <Users
                     size={18}
-                    className="text-text-secondary transition-colors duration-500 group-hover:text-accent-gold"
+                    className="text-text-secondary transition-colors duration-300 ease-out group-hover:text-indigo-mid"
                     strokeWidth={1.5}
                   />
                 </div>
                 <h3 className="text-lg font-semibold text-text-primary mb-1 tracking-tight">
                   {member.name}
                 </h3>
-                <p className="text-[13px] font-medium text-accent-gold mb-3">
+                <p className="text-[13px] font-medium text-indigo-accent mb-3">
                   {member.role}
                 </p>
                 <p className="text-[14px] text-text-secondary leading-relaxed">
@@ -170,7 +162,7 @@ export function About() {
         </StaggerContainer>
 
         {/* Canadian badge */}
-        <AnimatedSection delay={0.2} className="mt-12 md:mt-16">
+        <div className="mt-12 md:mt-16">
           <div className="flex items-center justify-center gap-3 py-6">
             <div className="w-6 h-4 rounded-sm bg-gradient-to-r from-red-600 to-red-500 relative overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center">
@@ -184,7 +176,7 @@ export function About() {
               </span>
             </span>
           </div>
-        </AnimatedSection>
+        </div>
       </div>
     </section>
   );

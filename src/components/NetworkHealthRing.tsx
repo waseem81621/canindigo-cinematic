@@ -72,7 +72,7 @@ export function NetworkHealthRing() {
       {[0, 1, 2].map((i) => (
         <motion.div
           key={i}
-          className="absolute w-1.5 h-1.5 rounded-full bg-accent-gold"
+          className="absolute w-1.5 h-1.5 rounded-full bg-indigo-mid"
           style={{ top: "50%", left: "50%" }}
           animate={{
             x: [

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, Clock, Send, CheckCircle, MapPin } from "lucide-react";
-import { AnimatedSection } from "./AnimatedSection";
 import { TextReveal } from "./TextReveal";
 import { MagneticButton } from "./MagneticButton";
 import { GlassButton } from "./GlassButton";
@@ -34,18 +33,13 @@ export function Contact() {
   return (
     <section id="contact" className="py-20 md:py-28 bg-bg-pure relative overflow-hidden">
       {/* Subtle ambient glow */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-gold/[0.03] rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent-teal/[0.03] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-mid/[0.04] rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-light/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
           {/* Left: Info */}
           <div>
-            <AnimatedSection>
-              <p className="text-[11px] font-medium text-accent-gold uppercase tracking-[0.2em] mb-4">
-                Contact
-              </p>
-            </AnimatedSection>
             <TextReveal
               className="text-[32px] md:text-[48px] lg:text-[56px] font-bold text-text-primary leading-[1.05] tracking-[-0.02em] mb-6"
               delay={0.1}
@@ -74,10 +68,10 @@ export function Contact() {
                     transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
                     className="flex items-start gap-4 group"
                   >
-                    <div className="w-11 h-11 rounded-xl bg-bg flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-accent-gold/10">
+                    <div className="w-11 h-11 rounded-xl bg-bg flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-indigo-accent/10">
                       <Icon
                         size={18}
-                        className="text-text-secondary transition-colors duration-300 group-hover:text-accent-gold"
+                        className="text-text-secondary transition-colors duration-300 group-hover:text-indigo-accent"
                         strokeWidth={1.5}
                       />
                     </div>
@@ -113,9 +107,9 @@ export function Contact() {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                    className="w-16 h-16 rounded-full bg-accent-gold/10 flex items-center justify-center mb-6"
+                    className="w-16 h-16 rounded-full bg-indigo-accent/10 flex items-center justify-center mb-6"
                   >
-                    <CheckCircle size={32} className="text-accent-gold" />
+                    <CheckCircle size={32} className="text-indigo-accent" />
                   </motion.div>
                   <h3 className="text-2xl font-bold text-text-primary mb-2">
                     {contactContent.form.successTitle}
@@ -143,7 +137,7 @@ export function Contact() {
                         onChange={(e) =>
                           setFormData({ ...formData, [field.name]: e.target.value })
                         }
-                        className="w-full px-5 py-3.5 bg-bg-pure border border-border rounded-xl text-[15px] text-text-primary placeholder:text-text-muted/60 focus:outline-none focus:border-accent-gold/60 focus:ring-1 focus:ring-accent-gold/15 transition-all duration-300"
+                        className="w-full px-5 py-3.5 bg-bg-pure border border-border rounded-xl text-[15px] text-text-primary placeholder:text-text-muted/60 focus:outline-none focus:border-indigo-accent/60 focus:ring-1 focus:ring-indigo-accent/15 transition-colors duration-200 ease-out"
                         placeholder={field.placeholder}
                       />
                     </div>
@@ -164,7 +158,7 @@ export function Contact() {
                       onChange={(e) =>
                         setFormData({ ...formData, interest: e.target.value })
                       }
-                      className="w-full px-5 py-3.5 bg-bg-pure border border-border rounded-xl text-[15px] text-text-primary focus:outline-none focus:border-accent-gold/60 focus:ring-1 focus:ring-accent-gold/15 transition-all duration-300 appearance-none cursor-pointer"
+                      className="w-full px-5 py-3.5 bg-bg-pure border border-border rounded-xl text-[15px] text-text-primary focus:outline-none focus:border-indigo-accent/60 focus:ring-1 focus:ring-indigo-accent/15 transition-colors duration-200 ease-out appearance-none cursor-pointer"
                     >
                       <option value="" disabled>
                         Select a service area
