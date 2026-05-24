@@ -117,12 +117,6 @@ function ServicePillar({
             duration={1.4}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-text-primary/30 to-transparent pointer-events-none" />
-          <div className="absolute bottom-5 left-5 px-4 py-3 rounded-xl bg-bg-pure/90 backdrop-blur-md border border-white/20 z-10">
-            <p className="text-2xl font-bold text-text-primary">{service.stat}</p>
-            <p className="text-[11px] text-text-muted uppercase tracking-wider">
-              {service.statLabel}
-            </p>
-          </div>
         </div>
       </div>
 

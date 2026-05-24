@@ -79,7 +79,10 @@ export function Contact() {
                       <p className="text-[12px] font-semibold text-text-muted uppercase tracking-[0.1em] mb-0.5">
                         {item.label}
                       </p>
-                      <p className="text-[15px] text-text-primary font-medium">
+                      <p
+                        className="text-[15px] text-text-primary font-medium"
+                        style={{ fontVariantNumeric: "tabular-nums" }}
+                      >
                         {item.value}
                       </p>
                     </div>

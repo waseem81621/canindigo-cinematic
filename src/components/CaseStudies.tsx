@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { X, ArrowUpRight, TrendingUp } from "lucide-react";
+import { X, ArrowUpRight } from "lucide-react";
 import { StaggerContainer, StaggerItem } from "./AnimatedSection";
 import { TiltCard } from "./TiltCard";
 import { caseStudies } from "../data/siteData";
@@ -69,60 +69,19 @@ function CaseStudyModal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.35 }}
-            className="text-lg md:text-xl text-text-primary font-medium mb-8"
+            className="text-lg md:text-xl text-text-primary font-medium mb-6"
           >
             {study.title}
           </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {[
-              { label: "Challenge", text: study.challenge },
-              { label: "Solution", text: study.solution },
-              { label: "Result", text: study.result },
-            ].map((item, i) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 + i * 0.1 }}
-                className="p-5 rounded-2xl bg-bg border border-border/60"
-              >
-                <p className="text-[10px] font-bold text-indigo-accent uppercase tracking-[0.15em] mb-2">
-                  {item.label}
-                </p>
-                <p className="text-[14px] text-text-secondary leading-relaxed">
-                  {item.text}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.65 }}
-            className="flex items-center gap-5 py-6 px-7 rounded-2xl border border-border/60 mb-8"
-            style={{ backgroundColor: `${study.accentColor}08` }}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.45 }}
+            className="text-[15px] md:text-base text-text-secondary leading-[1.7]"
           >
-            <div
-              className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-              style={{ backgroundColor: `${study.accentColor}15` }}
-            >
-              <TrendingUp size={22} style={{ color: study.accentColor }} />
-            </div>
-            <div>
-              <p className="text-[11px] font-medium text-text-muted uppercase tracking-[0.1em] mb-0.5">
-                Key Metric
-              </p>
-              <p className="text-2xl font-bold text-text-primary">
-                {study.metric}{" "}
-                <span className="text-base font-normal text-text-secondary">
-                  {study.metricLabel}
-                </span>
-              </p>
-            </div>
-          </motion.div>
-
+            {study.description}
+          </motion.p>
         </div>
       </motion.div>
     </motion.div>
@@ -233,26 +192,6 @@ function CaseStudyCard({
             >
               {study.client}
             </motion.h3>
-
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{
-                opacity: isHovered ? 1 : 0,
-                y: isHovered ? 0 : 10,
-              }}
-              transition={{ duration: 0.35, delay: 0.05 }}
-              className="mt-3 flex items-center gap-2"
-            >
-              <span
-                className="text-xl font-bold"
-                style={{ color: study.accentColor }}
-              >
-                {study.metric}
-              </span>
-              <span className="text-[12px] text-white/50">
-                {study.metricLabel}
-              </span>
-            </motion.div>
           </div>
         </div>
 

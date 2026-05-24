@@ -25,7 +25,10 @@ function CounterStat({
       transition={{ duration: 0.7, delay }}
       className="text-center"
     >
-      <p className="text-4xl md:text-5xl font-bold text-text-primary tracking-tight">
+      <p
+        className="text-4xl md:text-5xl font-bold text-text-primary tracking-tight"
+        style={{ fontVariantNumeric: "tabular-nums" }}
+      >
         {value}
       </p>
       <p className="mt-2 text-[12px] text-text-muted uppercase tracking-[0.15em]">

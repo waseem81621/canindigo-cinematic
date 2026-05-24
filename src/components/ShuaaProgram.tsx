@@ -208,27 +208,7 @@ export function ShuaaProgram() {
 
         <div>
           <div className="mt-14 md:mt-20 max-w-[720px] mx-auto text-center">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-              {shuaaContent.stats.map((stat, i) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.15 }}
-                  className="text-center"
-                >
-                  <p className="text-4xl md:text-5xl font-bold text-white mb-2">
-                    {stat.value}
-                  </p>
-                  <p className="text-[13px] text-white/40 uppercase tracking-[0.1em]">
-                    {stat.label}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="mt-14 p-8 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
+            <div className="p-8 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
               <p className="text-[17px] md:text-lg text-white/60 leading-[1.8] font-light">
                 {shuaaContent.description}
               </p>
