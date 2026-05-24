@@ -114,7 +114,7 @@ export const detailedServices = [
     icon: "Database",
     title: "ERP Development",
     tagline: "Custom ERP builds for finance, inventory, procurement, and operations — from scoping to go-live.",
-    clients: "See CI AAMT ERP under Boutique Apps",
+    clients: "See ERP under Boutique Apps",
   },
   {
     icon: "HardDrive",
