@@ -5,9 +5,14 @@
  *  - Card 1 (ICT)        → anchor scroll to #ict on the homepage
  *  - Card 2 (Interiors)  → /interiors  (Phase 5.5 will upgrade <a> → <Link>)
  *  - Card 3 (Automotive) → /automotive (Phase 5.5 will upgrade <a> → <Link>)
- *
- * Imagery: grey placeholder blocks for v1 — Unsplash hotlinks land
- * after user approval; real photography after that.
+ */
+
+/*
+ * Image credits (Unsplash, license-permissive):
+ * - ict-servers.jpg: Taylor Vick (photo-1558494949-ef010cbdcc31)
+ * - interiors-timber-ceiling.jpg: R Architecture (photo-1618220179428-22790b461013)
+ * - automotive-workshop-hoist.jpg: Mehmet Talha Onuk (photo-1727893119356-1702fe921cf9)
+ * TODO: Replace with own project photography once available.
  */
 const verticals = [
   {
@@ -17,7 +22,7 @@ const verticals = [
     href: "#ict",
     kind: "anchor" as const,
     imageAlt: "Server rack / data centre detail",
-    imageSrc: null as string | null,
+    imageSrc: "/images/verticals/ict-servers.jpg" as string | null,
   },
   {
     number: "Division 02",
@@ -27,7 +32,7 @@ const verticals = [
     // TODO Phase 5.5: replace <a> with <Link to={href}> from react-router-dom
     kind: "route" as const,
     imageAlt: "Warm timber-clad interior detail",
-    imageSrc: null as string | null,
+    imageSrc: "/images/verticals/interiors-timber-ceiling.jpg" as string | null,
   },
   {
     number: "Division 03",
@@ -37,7 +42,7 @@ const verticals = [
     // TODO Phase 5.5: replace <a> with <Link to={href}> from react-router-dom
     kind: "route" as const,
     imageAlt: "Clean workshop / vehicle on hoist",
-    imageSrc: null as string | null,
+    imageSrc: "/images/verticals/automotive-workshop-hoist.jpg" as string | null,
   },
 ];
 
