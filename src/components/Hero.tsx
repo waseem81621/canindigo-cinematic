@@ -76,26 +76,31 @@ export function Hero() {
               </span>
             </motion.div>
 
-            {heroContent.headline.map((line, i) => (
-              <div key={i} className="overflow-hidden">
-                <motion.h1
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{
-                    duration: 1,
-                    delay: 0.2 + i * 0.15,
-                    ease: [0.25, 0.1, 0.25, 1] as const,
-                  }}
-                  className="text-[48px] sm:text-[64px] md:text-[72px] lg:text-[80px] font-bold leading-[1.1] tracking-[-0.03em] pb-[0.05em] break-words"
-                >
-                  {i === heroContent.headline.length - 1 ? (
-                    <span className="text-indigo-mid">{line}</span>
-                  ) : (
-                    <span className="text-text-primary">{line}</span>
-                  )}
-                </motion.h1>
-              </div>
-            ))}
+            {/* Single semantic <h1> containing all three headline words.
+                Each word still slides up from below — preserved via per-line
+                motion.spans inside an overflow-hidden wrapper. */}
+            <h1 className="text-[48px] sm:text-[64px] md:text-[72px] lg:text-[80px] font-bold leading-[1.1] tracking-[-0.03em] pb-[0.05em] break-words">
+              {heroContent.headline.map((line, i) => (
+                <span key={i} className="block overflow-hidden">
+                  <motion.span
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    transition={{
+                      duration: 1,
+                      delay: 0.2 + i * 0.15,
+                      ease: [0.25, 0.1, 0.25, 1] as const,
+                    }}
+                    className={`block ${
+                      i === heroContent.headline.length - 1
+                        ? "text-indigo-mid"
+                        : "text-text-primary"
+                    }`}
+                  >
+                    {line}
+                  </motion.span>
+                </span>
+              ))}
+            </h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}

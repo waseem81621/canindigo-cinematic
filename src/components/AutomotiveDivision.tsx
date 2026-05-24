@@ -175,8 +175,9 @@ export function AutomotiveDivision() {
                 contracts available for fleet operators.
               </p>
 
-              {/* Stats strip */}
-              <div className="mt-10 grid grid-cols-3 gap-6 max-w-[480px]">
+              {/* Stats strip — stacks vertically below sm to mirror Interiors
+                  hero behaviour and stay safe at 320 px viewports. */}
+              <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 max-w-[480px]">
                 <div>
                   <div className="font-display text-2xl md:text-3xl font-medium text-text-primary leading-tight tracking-[-0.01em]">
                     Full service

@@ -14,7 +14,7 @@
   /* Text */
   --color-text-primary: #19162D;   /* primary text on light */
   --color-text-secondary: #534F66; /* secondary text on light (kept for legacy) */
-  --color-text-muted: #787387;     /* tertiary / muted text */
+  --color-text-muted: #635D74;     /* tertiary / muted text — darkened from #787387 (4.23:1) → #6E6981 (4.50, borderline) → #635D74 (≈5.20:1) so the navbar pill's translucent bg (bg-surface-light/80 over cream) also clears WCAG AA 4.5:1 */
   --color-text-light: #F2EDE6;     /* primary text on dark */
 
   /* Borders */
@@ -25,7 +25,7 @@
   --color-indigo-deep: #3C248C;
   --color-indigo-mid: #5940B8;     /* primary brand / CTA */
   --color-indigo-light: #8A6DE8;
-  --color-indigo-accent: #7B6CD9;  /* eyebrows / hairlines / accent text */
+  --color-indigo-accent: #6B5BD0;  /* eyebrows / hairlines / accent text — darkened from #7B6CD9 (4.15:1) to clear WCAG AA 4.5:1 against cream bg #F8F6F3 for body-text usages (About team eyebrows). Still visually the lighter brand purple, just slightly deeper. */
 
   /* Brand gradient — USE SPARINGLY (logo orb + 1-2 strategic moments per page) */
   --gradient-brand: linear-gradient(

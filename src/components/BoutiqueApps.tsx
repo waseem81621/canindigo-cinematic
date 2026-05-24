@@ -95,17 +95,7 @@ function AppCard({ app }: { app: (typeof boutiqueApps)[0] }) {
       `}
       tiltAmount={6}
     >
-      <a
-        href={isComingSoon ? undefined : app.href}
-        target={isComingSoon ? undefined : "_blank"}
-        rel={isComingSoon ? undefined : "noopener noreferrer"}
-        aria-disabled={isComingSoon || undefined}
-        tabIndex={isComingSoon ? -1 : undefined}
-        onClick={isComingSoon ? (e) => e.preventDefault() : undefined}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        className="block h-full"
-      >
+      <CardShell isComingSoon={isComingSoon} href={app.href} onHover={setHovered}>
         <div
           className={`relative h-full min-h-[200px] md:min-h-[220px] p-6 md:p-8 flex flex-col justify-between
             bg-white/60 backdrop-blur-xl border border-white/40
@@ -223,8 +213,50 @@ function AppCard({ app }: { app: (typeof boutiqueApps)[0] }) {
             }}
           />
         </div>
-      </a>
+      </CardShell>
     </TiltCard>
+  );
+}
+
+/**
+ * Renders an <a> for live apps, a non-interactive <div> for coming-soon ones.
+ * Coming-soon cards never become a link, so Lighthouse doesn't flag them as
+ * dead anchors, and they don't show up in the page's outbound-link graph.
+ */
+function CardShell({
+  isComingSoon,
+  href,
+  onHover,
+  children,
+}: {
+  isComingSoon: boolean;
+  href: string;
+  onHover: (v: boolean) => void;
+  children: React.ReactNode;
+}) {
+  if (isComingSoon) {
+    return (
+      <div
+        aria-disabled="true"
+        onMouseEnter={() => onHover(true)}
+        onMouseLeave={() => onHover(false)}
+        className="block h-full"
+      >
+        {children}
+      </div>
+    );
+  }
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onMouseEnter={() => onHover(true)}
+      onMouseLeave={() => onHover(false)}
+      className="block h-full"
+    >
+      {children}
+    </a>
   );
 }
 

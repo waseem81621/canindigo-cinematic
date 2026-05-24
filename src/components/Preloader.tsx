@@ -25,7 +25,9 @@ export function Preloader({ onComplete }: PreloaderProps) {
         clearInterval(timer);
         setTimeout(() => {
           setExit(true);
-          setTimeout(onComplete, 800);
+          // Match exit transition duration (0.2s) so the app content fade-in
+          // begins as the preloader fade-out finishes — no blank gap between.
+          setTimeout(onComplete, 200);
         }, 300);
       }
     }, interval);
@@ -37,10 +39,11 @@ export function Preloader({ onComplete }: PreloaderProps) {
     <AnimatePresence>
       {!exit && (
         <motion.div
+          aria-hidden="true"
           className="fixed inset-0 z-[9999] bg-bg flex flex-col items-center justify-center"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
         >
           {/* Logo */}
           <motion.div

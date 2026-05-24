@@ -81,8 +81,8 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-20 md:mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <p className="text-[12px] text-white/30">{footerContent.copyright}</p>
-          <p className="text-[12px] text-white/30">{footerContent.registration}</p>
+          <p className="text-[12px] text-white/50">{footerContent.copyright}</p>
+          <p className="text-[12px] text-white/50">{footerContent.registration}</p>
         </div>
       </div>
     </footer>

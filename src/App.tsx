@@ -15,6 +15,12 @@ function App() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    // Respect prefers-reduced-motion — skip Lenis init entirely.
+    // Browser falls back to native instant scroll for users who opted out
+    // of motion. framer-motion handles its own reduced-motion via hooks.
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

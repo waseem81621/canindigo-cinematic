@@ -127,8 +127,9 @@ export function InteriorsDivision() {
                 one timeline, one accountability.
               </p>
 
-              {/* Stats strip */}
-              <div className="mt-10 grid grid-cols-3 gap-6 max-w-[480px]">
+              {/* Stats strip — stacks vertically below sm to avoid overflow
+                  at 320px where "Single contractor" can't fit in a 3-col cell. */}
+              <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 max-w-[480px]">
                 <div>
                   <div
                     className="font-display text-4xl md:text-5xl font-medium text-text-primary leading-none tracking-[-0.02em]"
