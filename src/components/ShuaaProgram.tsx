@@ -73,7 +73,7 @@ export function ShuaaProgram() {
 
   return (
     <section className="py-20 md:py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[#0F0F11]" />
+      <div className="absolute inset-0 bg-bg-dark" />
       <div
         className="absolute inset-0 opacity-30"
         style={{
@@ -221,7 +221,7 @@ export function ShuaaProgram() {
                       className="absolute top-0 left-1/2 -translate-x-1/2 h-[2px] rounded-full"
                       style={{
                         width: "60%",
-                        background: "linear-gradient(90deg, transparent, #D4AF37, #2B6E6F, transparent)",
+                        background: "linear-gradient(90deg, transparent, var(--color-indigo-mid), var(--color-indigo-light), transparent)",
                       }}
                       animate={{ opacity: [0.4, 0.9, 0.4] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -230,7 +230,7 @@ export function ShuaaProgram() {
                   <motion.div
                     className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[80%] h-6 rounded-full blur-md"
                     style={{
-                      background: "linear-gradient(90deg, #D4AF3720, #2B6E6F20, #D4AF3720)",
+                      background: "linear-gradient(90deg, color-mix(in srgb, var(--color-indigo-mid) 12%, transparent), color-mix(in srgb, var(--color-indigo-light) 12%, transparent), color-mix(in srgb, var(--color-indigo-mid) 12%, transparent))",
                     }}
                     animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}

@@ -12,7 +12,7 @@ export function NetworkHealthRing() {
           cy="100"
           r="85"
           fill="none"
-          stroke="#E5E5E7"
+          stroke="#E6E2DC"
           strokeWidth="1"
         />
         {/* Animated progress ring */}
@@ -21,7 +21,7 @@ export function NetworkHealthRing() {
           cy="100"
           r="85"
           fill="none"
-          stroke="#D4AF37"
+          stroke="#5940B8"
           strokeWidth="2"
           strokeLinecap="round"
           strokeDasharray={`${2 * Math.PI * 85}`}
@@ -36,7 +36,7 @@ export function NetworkHealthRing() {
           cy="100"
           r="70"
           fill="none"
-          stroke="#2B6E6F"
+          stroke="#7B6CD9"
           strokeWidth="1"
           strokeLinecap="round"
           strokeDasharray={`${2 * Math.PI * 70}`}

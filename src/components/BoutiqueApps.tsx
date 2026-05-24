@@ -38,10 +38,11 @@ function GlowingLine({ active }: { active: boolean }) {
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
+        {/* Stops use the indigo palette inline — SVG stop-color attrs don't reliably accept var(--*) */}
         <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.9" />
-          <stop offset="50%" stopColor="#E8D5A3" stopOpacity="1" />
-          <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.9" />
+          <stop offset="0%" stopColor="#3C248C" stopOpacity="0.9" />
+          <stop offset="50%" stopColor="#8A6DE8" stopOpacity="1" />
+          <stop offset="100%" stopColor="#3C248C" stopOpacity="0.9" />
         </linearGradient>
       </defs>
       <motion.path
@@ -62,7 +63,7 @@ function GlowingLine({ active }: { active: boolean }) {
       {active && (
         <motion.circle
           r="2.5"
-          fill="#E8D5A3"
+          fill="#8A6DE8"
           filter="url(#lineGlow)"
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 1, 0] }}
@@ -129,14 +130,18 @@ function AppCard({ app }: { app: (typeof boutiqueApps)[0] }) {
                 className="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-500
                   bg-text-primary/5 group-hover:shadow-lg"
                 style={{
-                  boxShadow: hovered ? `0 4px 20px ${app.accent}30` : "none",
+                  boxShadow: hovered
+                    ? `0 4px 20px color-mix(in srgb, ${app.accent} 30%, transparent)`
+                    : "none",
                 }}
               >
                 {Icon && (
                   <Icon
                     size={20}
                     className="transition-colors duration-500"
-                    style={{ color: hovered ? app.accent : "#6E6E73" }}
+                    style={{
+                      color: hovered ? app.accent : "var(--color-text-muted)",
+                    }}
                     strokeWidth={1.5}
                   />
                 )}
@@ -183,10 +188,14 @@ function AppCard({ app }: { app: (typeof boutiqueApps)[0] }) {
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[12px] font-semibold
                   border transition-all duration-500"
                 style={{
-                  borderColor: hovered && !isComingSoon ? app.accent : "#E5E5E7",
-                  color: hovered && !isComingSoon ? app.accent : "#6E6E73",
+                  borderColor:
+                    hovered && !isComingSoon ? app.accent : "var(--color-border)",
+                  color:
+                    hovered && !isComingSoon ? app.accent : "var(--color-text-muted)",
                   backgroundColor:
-                    hovered && !isComingSoon ? `${app.accent}08` : "transparent",
+                    hovered && !isComingSoon
+                      ? `color-mix(in srgb, ${app.accent} 8%, transparent)`
+                      : "transparent",
                 }}
               >
                 {isComingSoon ? (
@@ -227,7 +236,7 @@ export function BoutiqueApps() {
         className="absolute inset-0 opacity-[0.015]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 1px 1px, #1A1A1C 1px, transparent 0)",
+            "radial-gradient(circle at 1px 1px, var(--color-text-primary) 1px, transparent 0)",
           backgroundSize: "40px 40px",
         }}
       />
