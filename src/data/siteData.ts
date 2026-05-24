@@ -290,7 +290,7 @@ export const aboutContent = {
 
 // ─── SHUAA PROGRAM ───
 export const shuaaContent = {
-  badge: "CAN.INDIGO Initiative",
+  badge: "CanIndigo Initiative",
   headline: "Shuaa Program",
   subheadline:
     "The Digital Pedestal — empowering Omani Gen Z with technology skills for the future.",
