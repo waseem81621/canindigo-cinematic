@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react";
 import { NetworkHealthRing } from "./NetworkHealthRing";
 import { MagneticButton } from "./MagneticButton";
 import { GlassButton } from "./GlassButton";
-import { ParticleField } from "./ParticleField";
 import { TextScramble } from "./TextScramble";
 import { heroContent } from "../data/siteData";
 
@@ -33,7 +32,6 @@ export function Hero() {
       ref={containerRef}
       className="relative min-h-[100dvh] flex items-end pt-32 md:pt-40 pb-16 md:pb-28 overflow-hidden"
     >
-      <ParticleField />
       <div
         className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{

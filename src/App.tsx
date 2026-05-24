@@ -10,7 +10,6 @@ import { ShuaaProgram } from "./components/ShuaaProgram";
 import { About } from "./components/About";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
-import { CustomCursor } from "./components/CustomCursor";
 import { Preloader } from "./components/Preloader";
 import { PageTransition } from "./components/PageTransition";
 
@@ -40,7 +39,6 @@ function App() {
     <>
       {!loaded && <Preloader onComplete={() => setLoaded(true)} />}
       <div className={`min-h-screen bg-bg transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}>
-        <CustomCursor />
         <Navbar />
         <PageTransition>
           <main>
