@@ -6,11 +6,11 @@
 
 // ─── NAVIGATION ───
 export const navLinks = [
-  { label: "ICT", href: "#ict" },
-  { label: "Interiors", href: "#interiors" },
-  { label: "Automotive", href: "#automotive" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "ICT", href: "/#ict" },
+  { label: "Interiors", href: "/interiors" },
+  { label: "Automotive", href: "/automotive" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 // ─── HERO ───

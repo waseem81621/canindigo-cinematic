@@ -227,8 +227,8 @@ export function InteriorsDivision() {
               Every surface, end to end.
             </h2>
             <p className="mt-5 text-[17px] text-text-secondary leading-relaxed">
-              Four disciplines delivered by one in-house team. No sub-contractor
-              chains, no inter-trade handover gaps.
+              Four disciplines coordinated under one contract. Single point of
+              accountability, sequenced delivery, no inter-trade handover gaps.
             </p>
           </div>
 
@@ -329,9 +329,9 @@ export function InteriorsDivision() {
                 Four trades. One handover.
               </h2>
               <p className="mt-5 text-[17px] text-text-light/70 leading-relaxed max-w-[560px]">
-                From ceiling to floor, lighting to finish — one team delivers
-                the complete fit-out. Single point of accountability, no
-                inter-trade gaps, no day-rate sub-contractor chains.
+                From ceiling to floor, lighting to finish — one contract delivers
+                the complete fit-out. Single point of accountability, sequenced
+                trades, predictable handover.
               </p>
             </div>
 
