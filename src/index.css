@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #F9F9FB;
+  --color-bg-pure: #FFFFFF;
+  --color-text-primary: #1A1A1C;
+  --color-text-secondary: #6E6E73;
+  --color-text-muted: #86868B;
+  --color-accent-gold: #D4AF37;
+  --color-accent-teal: #2B6E6F;
+  --color-border: #E5E5E7;
+  --color-border-hover: #D4AF37;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #F9F9FB;
+  color: #1A1A1C;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: rgba(212, 175, 55, 0.2);
+  color: #1A1A1C;
+}
+
+/* Hide default cursor on desktop */
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Glass Button Variants */
+.glass-btn-primary {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212,175,55,0.4);
+  box-shadow: 0 4px 24px rgba(212,175,55,0.15), 0 1px 3px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.6);
+  color: #1A1A1C;
+  transition: background 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.glass-btn-primary:hover {
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 8px 32px rgba(212,175,55,0.22), 0 2px 6px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.7);
+  border-color: rgba(212,175,55,0.6);
+}
+.glass-btn-primary[data-pressed="true"] {
+  background: rgba(249,249,251,0.5);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-color: rgba(212,175,55,0.25);
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.12), inset 0 1px 2px rgba(0,0,0,0.08), 0 1px 2px rgba(255,255,255,0.3);
+}
+
+.glass-btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(26,26,28,0.15);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.4);
+  color: #6E6E73;
+  transition: background 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+}
+.glass-btn-secondary:hover {
+  background: rgba(26,26,28,0.03);
+  border-color: rgba(26,26,28,0.25);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5);
+  color: #1A1A1C;
+}
+.glass-btn-secondary[data-pressed="true"] {
+  background: rgba(26,26,28,0.06);
+  border-color: rgba(26,26,28,0.15);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.08), inset 0 1px 2px rgba(0,0,0,0.05);
+  color: #1A1A1C;
+}
+
+.glass-btn-ghost {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #6E6E73;
+  transition: background 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+}
+.glass-btn-ghost:hover {
+  background: rgba(26,26,28,0.03);
+  border-color: rgba(26,26,28,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  color: #1A1A1C;
+}
+.glass-btn-ghost[data-pressed="true"] {
+  background: rgba(26,26,28,0.06);
+  border-color: rgba(26,26,28,0.12);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.06);
+  color: #1A1A1C;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F9F9FB;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4D4D8;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A1A1AA;
+}
+
+/* Thin underline animation for nav links */
+.nav-underline {
+  position: relative;
+}
+
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #D4AF37;
+  transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-underline:hover::after {
+  width: 100%;
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 0.5px solid rgba(229, 229, 231, 0.8);
+}
+
+/* Hero gradient overlay */
+.hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(249, 249, 251, 0.1) 0%,
+    rgba(249, 249, 251, 0.4) 50%,
+    rgba(249, 249, 251, 0.95) 100%
+  );
+}
+
+/* Subtle pulse animation for network ring */
+@keyframes softPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+.pulse-ring {
+  animation: softPulse 3s ease-in-out infinite;
+}
+
+/* Progress bar */
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Image hover overlay */
+.image-overlay {
+  background: linear-gradient(
+    0deg,
+    rgba(26, 26, 28, 0.85) 0%,
+    rgba(26, 26, 28, 0.4) 40%,
+    transparent 100%
+  );
+}

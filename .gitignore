@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.vercel
+.DS_Store
+*.log
+.env
+.env.local
+.env.development.local
+.env.production.local
+.hallmark/
+.playwright-mcp/
