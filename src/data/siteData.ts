@@ -6,8 +6,9 @@
 
 // ─── NAVIGATION ───
 export const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Case Studies", href: "#case-studies" },
+  { label: "ICT", href: "#ict" },
+  { label: "Interiors", href: "#interiors" },
+  { label: "Automotive", href: "#automotive" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -341,40 +342,18 @@ export const contactContent = {
   },
 };
 
-// ─── FOOTER ───
+// ─── FOOTER (Ft5 Statement) ───
 export const footerContent = {
+  statement: "Canadian precision. Omani partnership.",
   companies: ["Abu Ayat Modern Trad (A Riyada SME)"],
-  links: [
-    {
-      title: "Services",
-      links: [
-        { label: "Managed Infrastructure", href: "#services" },
-        { label: "Cybersecurity", href: "#services" },
-        { label: "Digital Transformation", href: "#services" },
-        { label: "Managed Wi-Fi", href: "#services" },
-      ],
-    },
-    {
-      title: "Company",
-      links: [
-        { label: "About Us", href: "#about" },
-        { label: "Case Studies", href: "#case-studies" },
-        { label: "Careers", href: "#contact" },
-        { label: "Contact", href: "#contact" },
-      ],
-    },
-    {
-      title: "Resources",
-      links: [
-        { label: "Client Portal", href: "#" },
-        { label: "SLA Status", href: "#" },
-        { label: "Documentation", href: "#" },
-        { label: "Privacy Policy", href: "#" },
-      ],
-    },
-  ],
+  contact: {
+    address: "Bait Al Falaj St, PC 112, Muscat, Sultanate of Oman",
+    email: "info@canindigo.om",
+    phone: "+968 98540055",
+    whatsappHref: "https://wa.me/96898540055",
+  },
   copyright: `© ${new Date().getFullYear()} CanIndigo Oman. All rights reserved.`,
-  registration: "Bait Al Falaj St, PC 112, Muscat, Sultanate of Oman",
+  registration: "Riyada SME Registered",
 };
 
 // ─── PRELOADER ───
