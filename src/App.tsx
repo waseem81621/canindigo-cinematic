@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Lenis from "lenis";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
+import { VerticalsSelector } from "./components/VerticalsSelector";
 import { ClientStrip } from "./components/ClientStrip";
 import { Services } from "./components/Services";
 import { BoutiqueApps } from "./components/BoutiqueApps";
@@ -43,10 +44,13 @@ function App() {
         <PageTransition>
           <main>
             <Hero />
+            <VerticalsSelector />
             <ClientStrip />
-            <Services />
-            <BoutiqueApps />
-            <CaseStudies />
+            <section id="ict">
+              <Services />
+              <BoutiqueApps />
+              <CaseStudies />
+            </section>
             <ShuaaProgram />
             <About />
             <Contact />
