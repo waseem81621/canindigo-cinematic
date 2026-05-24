@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import Lenis from "lenis";
 import { Navbar } from "./components/Navbar";
-import { Hero } from "./components/Hero";
-import { VerticalsSelector } from "./components/VerticalsSelector";
-import { ClientStrip } from "./components/ClientStrip";
-import { Services } from "./components/Services";
-import { BoutiqueApps } from "./components/BoutiqueApps";
-import { CaseStudies } from "./components/CaseStudies";
-import { ShuaaProgram } from "./components/ShuaaProgram";
-import { About } from "./components/About";
-import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { Preloader } from "./components/Preloader";
 import { PageTransition } from "./components/PageTransition";
+import { ScrollToTop } from "./components/ScrollToTop";
+import { HomePage } from "./pages/HomePage";
+import { InteriorsPage } from "./pages/InteriorsPage";
+import { AutomotivePage } from "./pages/AutomotivePage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -38,23 +35,17 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       {!loaded && <Preloader onComplete={() => setLoaded(true)} />}
       <div className={`min-h-screen bg-bg transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}>
         <Navbar />
         <PageTransition>
-          <main>
-            <Hero />
-            <VerticalsSelector />
-            <ClientStrip />
-            <section id="ict">
-              <Services />
-              <BoutiqueApps />
-              <CaseStudies />
-            </section>
-            <ShuaaProgram />
-            <About />
-            <Contact />
-          </main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/interiors" element={<InteriorsPage />} />
+            <Route path="/automotive" element={<AutomotivePage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         </PageTransition>
         <Footer />
       </div>

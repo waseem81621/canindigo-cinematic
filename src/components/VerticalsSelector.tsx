@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 /**
  * VerticalsSelector — "Three divisions. One standard."
  *
  * Sits directly below the hero. Three cards in a md:grid-cols-3 layout:
- *  - Card 1 (ICT)        → anchor scroll to #ict on the homepage
- *  - Card 2 (Interiors)  → /interiors  (Phase 5.5 will upgrade <a> → <Link>)
- *  - Card 3 (Automotive) → /automotive (Phase 5.5 will upgrade <a> → <Link>)
+ *  - Card 1 (ICT)        → anchor scroll to #ict on the homepage (<a href>)
+ *  - Card 2 (Interiors)  → react-router <Link to="/interiors">
+ *  - Card 3 (Automotive) → react-router <Link to="/automotive">
  */
 
 /*
@@ -62,49 +64,60 @@ export function VerticalsSelector() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-          {verticals.map((v) => (
-            <a
-              key={v.number}
-              href={v.href}
-              className="group relative block aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-bg-pure transition-colors duration-300 ease-out hover:border-indigo-accent/40"
-            >
-              {/* Image / placeholder */}
-              <div className="absolute inset-0 overflow-hidden">
-                {v.imageSrc ? (
-                  <img
-                    src={v.imageSrc}
-                    alt={v.imageAlt}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-bg">
-                    <span className="text-[11px] uppercase tracking-[0.15em] text-text-muted/60 text-center px-6">
-                      {v.imageAlt} — image pending
+          {verticals.map((v) => {
+            const cardClass =
+              "group relative block aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-bg-pure transition-colors duration-300 ease-out hover:border-indigo-accent/40";
+
+            const cardInner = (
+              <>
+                {/* Image / placeholder */}
+                <div className="absolute inset-0 overflow-hidden">
+                  {v.imageSrc ? (
+                    <img
+                      src={v.imageSrc}
+                      alt={v.imageAlt}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-bg">
+                      <span className="text-[11px] uppercase tracking-[0.15em] text-text-muted/60 text-center px-6">
+                        {v.imageAlt} — image pending
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Bottom-up dark overlay so caption stays readable */}
+                <div className="absolute inset-0 bg-gradient-to-t from-text-primary/85 via-text-primary/30 to-transparent pointer-events-none" />
+
+                {/* Caption — bottom-left */}
+                <div className="absolute inset-x-0 bottom-0 p-6 md:p-7">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="block w-6 h-px bg-indigo-accent" />
+                    <span className="text-[11px] uppercase tracking-[0.15em] text-white/70">
+                      {v.number}
                     </span>
                   </div>
-                )}
-              </div>
-
-              {/* Bottom-up dark overlay so caption stays readable */}
-              <div className="absolute inset-0 bg-gradient-to-t from-text-primary/85 via-text-primary/30 to-transparent pointer-events-none" />
-
-              {/* Caption — bottom-left */}
-              <div className="absolute inset-x-0 bottom-0 p-6 md:p-7">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="block w-6 h-px bg-indigo-accent" />
-                  <span className="text-[11px] uppercase tracking-[0.15em] text-white/70">
-                    {v.number}
-                  </span>
+                  <h3 className="font-display text-2xl md:text-3xl font-medium text-white tracking-tight mb-2">
+                    {v.name}
+                  </h3>
+                  <p className="text-[13px] text-white/70 leading-relaxed max-w-[280px]">
+                    {v.sub}
+                  </p>
                 </div>
-                <h3 className="font-display text-2xl md:text-3xl font-medium text-white tracking-tight mb-2">
-                  {v.name}
-                </h3>
-                <p className="text-[13px] text-white/70 leading-relaxed max-w-[280px]">
-                  {v.sub}
-                </p>
-              </div>
-            </a>
-          ))}
+              </>
+            );
+
+            return v.kind === "route" ? (
+              <Link key={v.number} to={v.href} className={cardClass}>
+                {cardInner}
+              </Link>
+            ) : (
+              <a key={v.number} href={v.href} className={cardClass}>
+                {cardInner}
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
