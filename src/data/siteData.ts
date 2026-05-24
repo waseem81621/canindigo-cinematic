@@ -345,7 +345,10 @@ export const contactContent = {
 // ─── FOOTER (Ft5 Statement) ───
 export const footerContent = {
   statement: "Canadian precision. Omani partnership.",
-  companies: ["Abu Ayat Modern Trad (A Riyada SME)"],
+  companies: [
+    "Abu Ayat Modern Trad (A Riyada SME)",
+    "Amber Radiance",
+  ],
   contact: {
     address: "Bait Al Falaj St, PC 112, Muscat, Sultanate of Oman",
     email: "info@canindigo.om",

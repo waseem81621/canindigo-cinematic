@@ -66,7 +66,7 @@ const trades = [
     bullets: [
       "Architectural linear LED & cove",
       "Pendant & decorative fixtures",
-      "Dimming & scene control",
+      "Concealed cabling & clean terminations",
     ],
     image: "/images/interiors/lighting-linear-led-grid.jpg",
     imageAlt: "Architectural linear LED lighting installation",
@@ -123,8 +123,8 @@ export function InteriorsDivision() {
                 Oman's most demanding executive and residential clients.
               </p>
               <p className="mt-4 text-[15px] text-text-muted leading-relaxed max-w-[460px]">
-                In-house team, no sub-contracting, full accountability under
-                one Riyada SME registration.
+                Single point of contact across all four trades. One contract,
+                one timeline, one accountability.
               </p>
 
               {/* Stats strip */}
@@ -142,10 +142,10 @@ export function InteriorsDivision() {
                 </div>
                 <div>
                   <div className="font-display text-2xl md:text-3xl font-medium text-text-primary leading-tight tracking-[-0.01em]">
-                    In-house
+                    Single contractor
                   </div>
                   <div className="mt-2 text-[11px] uppercase tracking-[0.15em] text-text-muted">
-                    No sub-contracting
+                    Full-scope delivery
                   </div>
                 </div>
                 <div>
@@ -321,14 +321,14 @@ export function InteriorsDivision() {
             <div className="lg:col-span-7">
               <div className="flex items-center gap-2 mb-5">
                 <span className="block w-6 h-px bg-indigo-accent" />
-                <span className="text-[11px] uppercase tracking-[0.18em] text-text-on-dark/60">
+                <span className="text-[11px] uppercase tracking-[0.18em] text-text-light/60">
                   One contractor, full scope
                 </span>
               </div>
-              <h2 className="font-display text-[36px] md:text-[48px] lg:text-[56px] font-medium text-text-on-dark leading-[1.05] tracking-[-0.02em]">
+              <h2 className="font-display text-[36px] md:text-[48px] lg:text-[56px] font-medium text-text-light leading-[1.05] tracking-[-0.02em]">
                 Four trades. One handover.
               </h2>
-              <p className="mt-5 text-[17px] text-text-on-dark/70 leading-relaxed max-w-[560px]">
+              <p className="mt-5 text-[17px] text-text-light/70 leading-relaxed max-w-[560px]">
                 From ceiling to floor, lighting to finish — one team delivers
                 the complete fit-out. Single point of accountability, no
                 inter-trade gaps, no day-rate sub-contractor chains.
@@ -338,7 +338,7 @@ export function InteriorsDivision() {
             <div className="lg:col-span-5 flex flex-col sm:flex-row lg:justify-end gap-3">
               <a
                 href="/#contact"
-                className="inline-flex items-center justify-center px-6 py-3 text-[14px] font-medium text-text-on-dark border border-text-on-dark/30 rounded-full hover:border-text-on-dark hover:bg-text-on-dark/5 transition-colors duration-200 ease-out"
+                className="inline-flex items-center justify-center px-6 py-3 text-[14px] font-medium text-text-light border border-text-light/30 rounded-full hover:border-text-light hover:bg-text-light/5 transition-colors duration-200 ease-out"
               >
                 Get a Quote
               </a>
