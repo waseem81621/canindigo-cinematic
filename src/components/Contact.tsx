@@ -13,9 +13,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   MapPin,
 };
 
-// TODO: Replace YOUR_FORM_ID with actual Formspree form ID after creating
-// account at https://formspree.io and creating a form for sales@can-indigo.com
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xvzybjyy";
 
 type FormState = {
   name: string;
