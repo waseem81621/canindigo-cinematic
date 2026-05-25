@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, Clock, Send, CheckCircle, MapPin } from "lucide-react";
+import { Mail, Phone, Clock, Send, CheckCircle, MapPin, AlertCircle } from "lucide-react";
 import { TextReveal } from "./TextReveal";
 import { MagneticButton } from "./MagneticButton";
 import { GlassButton } from "./GlassButton";
@@ -13,22 +13,52 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   MapPin,
 };
 
+// TODO: Replace YOUR_FORM_ID with actual Formspree form ID after creating
+// account at https://formspree.io and creating a form for sales@can-indigo.com
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+type FormState = {
+  name: string;
+  company: string;
+  email: string;
+  phone: string;
+  interest: string;
+};
+
+type SubmitStatus = "idle" | "submitting" | "success" | "error";
+
 export function Contact() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormState>({
     name: "",
     company: "",
+    email: "",
+    phone: "",
     interest: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<SubmitStatus>("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: "", company: "", interest: "" });
-    }, 4000);
+    const form = e.currentTarget;
+    setStatus("submitting");
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ name: "", company: "", email: "", phone: "", interest: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
+
+  const resetForm = () => setStatus("idle");
 
   return (
     <section id="contact" className="py-20 md:py-28 bg-bg-pure relative overflow-hidden">
@@ -100,7 +130,7 @@ export function Contact() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="bg-bg rounded-3xl border border-border p-8 md:p-10">
-              {submitted ? (
+              {status === "success" ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -117,9 +147,32 @@ export function Contact() {
                   <h3 className="text-2xl font-bold text-text-primary mb-2">
                     {contactContent.form.successTitle}
                   </h3>
-                  <p className="text-[15px] text-text-secondary">
+                  <p className="text-[15px] text-text-secondary max-w-[360px]">
                     {contactContent.form.successMessage}
                   </p>
+                </motion.div>
+              ) : status === "error" ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex flex-col items-center justify-center py-16 text-center"
+                >
+                  <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center mb-6">
+                    <AlertCircle size={32} className="text-red-600" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-text-primary mb-2">
+                    {contactContent.form.errorTitle}
+                  </h3>
+                  <p className="text-[15px] text-text-secondary max-w-[360px] mb-6">
+                    {contactContent.form.errorMessage}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={resetForm}
+                    className="text-[13px] font-semibold text-indigo-accent underline underline-offset-4 hover:text-indigo-mid transition-colors duration-200 ease-out"
+                  >
+                    Try again
+                  </button>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -136,11 +189,23 @@ export function Contact() {
                         name={field.name}
                         type={field.type}
                         required
-                        value={formData[field.name as keyof typeof formData]}
+                        autoComplete={
+                          field.name === "email"
+                            ? "email"
+                            : field.name === "phone"
+                            ? "tel"
+                            : field.name === "name"
+                            ? "name"
+                            : field.name === "company"
+                            ? "organization"
+                            : "off"
+                        }
+                        value={formData[field.name as keyof FormState]}
                         onChange={(e) =>
                           setFormData({ ...formData, [field.name]: e.target.value })
                         }
-                        className="w-full px-5 py-3.5 bg-bg-pure border border-border rounded-xl text-[15px] text-text-primary placeholder:text-text-muted/60 focus:outline-none focus:border-indigo-accent/60 focus:ring-1 focus:ring-indigo-accent/15 transition-colors duration-200 ease-out"
+                        disabled={status === "submitting"}
+                        className="w-full px-5 py-3.5 bg-bg-pure border border-border rounded-xl text-[15px] text-text-primary placeholder:text-text-muted/60 focus:outline-none focus:border-indigo-accent/60 focus:ring-1 focus:ring-indigo-accent/15 transition-colors duration-200 ease-out disabled:opacity-60"
                         placeholder={field.placeholder}
                       />
                     </div>
@@ -161,7 +226,8 @@ export function Contact() {
                       onChange={(e) =>
                         setFormData({ ...formData, interest: e.target.value })
                       }
-                      className="w-full px-5 py-3.5 bg-bg-pure border border-border rounded-xl text-[15px] text-text-primary focus:outline-none focus:border-indigo-accent/60 focus:ring-1 focus:ring-indigo-accent/15 transition-colors duration-200 ease-out appearance-none cursor-pointer"
+                      disabled={status === "submitting"}
+                      className="w-full px-5 py-3.5 bg-bg-pure border border-border rounded-xl text-[15px] text-text-primary focus:outline-none focus:border-indigo-accent/60 focus:ring-1 focus:ring-indigo-accent/15 transition-colors duration-200 ease-out appearance-none cursor-pointer disabled:opacity-60"
                     >
                       <option value="" disabled>
                         Select a service area
@@ -176,12 +242,16 @@ export function Contact() {
 
                   <MagneticButton className="w-full mt-2">
                     <GlassButton
+                      type="submit"
                       variant="primary"
                       size="lg"
                       className="w-full"
                       icon={<Send size={14} />}
+                      disabled={status === "submitting"}
                     >
-                      {contactContent.form.submitLabel}
+                      {status === "submitting"
+                        ? "Submitting…"
+                        : contactContent.form.submitLabel}
                     </GlassButton>
                   </MagneticButton>
 

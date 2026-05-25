@@ -11,6 +11,8 @@ interface GlassButtonProps {
   size?: "sm" | "md" | "lg";
   className?: string;
   icon?: ReactNode;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export function GlassButton({
@@ -23,6 +25,8 @@ export function GlassButton({
   size = "md",
   className = "",
   icon,
+  type,
+  disabled,
 }: GlassButtonProps) {
   const [pressed, setPressed] = useState(false);
 
@@ -59,7 +63,7 @@ export function GlassButton({
   }
 
   return (
-    <motion.button onClick={onClick} {...motionProps}>
+    <motion.button type={type} disabled={disabled} onClick={onClick} {...motionProps}>
       <span>{children}</span>
       {icon}
     </motion.button>

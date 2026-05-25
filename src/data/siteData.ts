@@ -308,7 +308,7 @@ export const contactContent = {
   description:
     "Every engagement begins with understanding. Share your context, and we'll respond within two hours with next steps.",
   info: [
-    { icon: "Mail", label: "Email", value: "info@canindigo.om" },
+    { icon: "Mail", label: "Email", value: "sales@can-indigo.com" },
     { icon: "Phone", label: "Phone", value: "+968 98540055" },
     {
       icon: "Clock",
@@ -326,6 +326,8 @@ export const contactContent = {
         placeholder: "Organization name",
         type: "text",
       },
+      { name: "email", label: "Email", placeholder: "your@email.com", type: "email" },
+      { name: "phone", label: "Phone", placeholder: "+968 XXXX XXXX", type: "tel" },
     ],
     interests: [
       "Managed Infrastructure",
@@ -336,9 +338,14 @@ export const contactContent = {
       "General Inquiry",
     ],
     submitLabel: "Submit Request",
-    privacyNote: "Your information is kept strictly confidential.",
-    successTitle: "Message received.",
-    successMessage: "We'll be in touch within two hours.",
+    privacyNote:
+      "Your information is kept strictly confidential. We respond via email or WhatsApp within one business day.",
+    successTitle: "Thank you.",
+    successMessage:
+      "We've received your enquiry and will be in touch shortly via email or WhatsApp.",
+    errorTitle: "Something went wrong.",
+    errorMessage:
+      "Please try again, or reach us directly at sales@can-indigo.com or +968 98540055.",
   },
 };
 
@@ -351,7 +358,7 @@ export const footerContent = {
   ],
   contact: {
     address: "Bait Al Falaj St, PC 112, Muscat, Sultanate of Oman",
-    email: "info@canindigo.om",
+    email: "sales@can-indigo.com",
     phone: "+968 98540055",
     whatsappHref: "https://wa.me/96898540055",
   },
