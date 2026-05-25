@@ -7,6 +7,7 @@ import {
   Lamp,
   ArrowUpRight,
 } from "lucide-react";
+import { whatsappHref } from "../data/siteData";
 
 /*
  * Image credits (Unsplash, license-permissive):
@@ -168,7 +169,7 @@ export function InteriorsDivision() {
                   Get a Quote
                 </a>
                 <a
-                  href="https://wa.me/96898540055"
+                  href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center justify-center gap-1.5 px-6 py-3 text-[14px] font-medium text-white bg-indigo-mid rounded-full hover:bg-indigo-light transition-colors duration-200 ease-out"
@@ -344,7 +345,7 @@ export function InteriorsDivision() {
                 Get a Quote
               </a>
               <a
-                href="https://wa.me/96898540055"
+                href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-1.5 px-6 py-3 text-[14px] font-medium text-white bg-indigo-mid rounded-full hover:bg-indigo-light transition-colors duration-200 ease-out"

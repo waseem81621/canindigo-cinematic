@@ -4,6 +4,12 @@
 // All components import from here.
 // ============================================================
 
+// ─── CONTACT LINKS (centralized) ───
+// wa.me format fails to resolve on some Oman mobile carriers
+// (DNS_PROBE_FINISHED_NXDOMAIN), so we use the api.whatsapp.com
+// /send/?phone= format which works reliably across carriers.
+export const whatsappHref = "https://api.whatsapp.com/send/?phone=96898540055";
+
 // ─── NAVIGATION ───
 export const navLinks = [
   { label: "ICT", href: "/#ict" },
@@ -360,7 +366,7 @@ export const footerContent = {
     address: "Bait Al Falaj St, PC 112, Muscat, Sultanate of Oman",
     email: "sales@can-indigo.com",
     phone: "+968 98540055",
-    whatsappHref: "https://wa.me/96898540055",
+    whatsappHref,
   },
   copyright: `© ${new Date().getFullYear()} CanIndigo Oman. All rights reserved.`,
   registration: "Riyada SME Registered",
