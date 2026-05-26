@@ -1,75 +1,8 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { Play, Pause, Sparkles, Volume2, VolumeX } from "lucide-react";
+import { motion } from "framer-motion";
+import { Sparkles } from "lucide-react";
 import { shuaaContent } from "../data/siteData";
 
-function FloatingParticle({ delay, x, duration }: { delay: number; x: string; duration: number }) {
-  return (
-    <motion.div
-      className="absolute w-1 h-1 rounded-full bg-indigo-light/40"
-      style={{ left: x, bottom: "20%" }}
-      animate={{
-        y: [0, -120, -200],
-        opacity: [0, 0.8, 0],
-        scale: [0.5, 1.2, 0.3],
-      }}
-      transition={{
-        duration,
-        delay,
-        repeat: Infinity,
-        ease: "easeOut",
-      }}
-    />
-  );
-}
-
-function DataNode({ x, y, delay }: { x: string; y: string; delay: number }) {
-  return (
-    <motion.div
-      className="absolute flex items-center gap-1.5 px-2 py-1 rounded-md bg-white/5 backdrop-blur-sm border border-white/10"
-      style={{ left: x, top: y }}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: [0, 1, 1, 0], scale: [0.8, 1, 1, 0.8] }}
-      transition={{
-        duration: 4,
-        delay,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    >
-      <div className="w-1.5 h-1.5 rounded-full bg-indigo-light/70" />
-      <div className="w-12 h-1 rounded-full bg-white/20" />
-      <div className="w-6 h-1 rounded-full bg-white/10" />
-    </motion.div>
-  );
-}
-
 export function ShuaaProgram() {
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
-  const [time, setTime] = useState(0);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const shouldReduceMotion = useReducedMotion();
-  const ambientMotion = isPlaying && !shouldReduceMotion;
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    if (isPlaying) {
-      v.play().catch(() => setIsPlaying(false));
-    } else {
-      v.pause();
-    }
-  }, [isPlaying]);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    const onTime = () => setTime(Math.floor(v.currentTime));
-    v.addEventListener("timeupdate", onTime);
-    return () => v.removeEventListener("timeupdate", onTime);
-  }, []);
-
   return (
     <section className="py-20 md:py-28 relative overflow-hidden">
       <div className="absolute inset-0 bg-bg-dark" />
@@ -119,88 +52,16 @@ export function ShuaaProgram() {
             >
               <div className="relative rounded-xl md:rounded-2xl overflow-hidden bg-black border border-white/10 shadow-2xl">
                 <div className="relative aspect-video overflow-hidden">
-                    <video
-                      ref={videoRef}
-                      src={shuaaContent.videoUrl}
-                      poster={shuaaContent.screenImage}
-                      autoPlay
-                      muted={isMuted}
-                      loop
-                      playsInline
-                      preload="metadata"
-                      className="absolute inset-0 w-full h-full object-contain bg-black"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
-
-                    {ambientMotion && (
-                      <>
-                        <DataNode x="8%" y="15%" delay={0} />
-                        <DataNode x="65%" y="25%" delay={1.5} />
-                        <DataNode x="45%" y="55%" delay={3} />
-                        <DataNode x="75%" y="70%" delay={2} />
-                      </>
-                    )}
-
-                    {ambientMotion && (
-                      <>
-                        <FloatingParticle delay={0} x="15%" duration={5} />
-                        <FloatingParticle delay={1.2} x="35%" duration={6} />
-                        <FloatingParticle delay={2.5} x="55%" duration={4.5} />
-                        <FloatingParticle delay={0.8} x="75%" duration={5.5} />
-                        <FloatingParticle delay={3} x="85%" duration={4} />
-                      </>
-                    )}
-
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setIsMuted((m) => !m);
-                      }}
-                      aria-label={isMuted ? "Unmute video" : "Mute video"}
-                      className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 hover:bg-white/20 transition-colors"
-                    >
-                      {isMuted ? (
-                        <VolumeX size={16} className="text-white" />
-                      ) : (
-                        <Volume2 size={16} className="text-white" />
-                      )}
-                    </button>
-
-                    <button
-                      onClick={() => setIsPlaying(!isPlaying)}
-                      aria-label={isPlaying ? "Pause video" : "Play video"}
-                      className="absolute inset-0 flex items-center justify-center group cursor-pointer"
-                    >
-                      <motion.div
-                        className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20
-                          group-hover:bg-white/20 group-hover:scale-110 transition-all duration-300"
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        {isPlaying ? (
-                          <Pause size={20} className="text-white" />
-                        ) : (
-                          <Play size={20} className="text-white ml-0.5" />
-                        )}
-                      </motion.div>
-                    </button>
-
-                    <div className="absolute bottom-0 left-0 right-0 px-5 py-4 flex items-end justify-between">
-                      <div>
-                        <p className="text-[10px] font-semibold text-white/40 uppercase tracking-[0.15em] mb-1">
-                          Shuaa Program — Cohort 2024
-                        </p>
-                        <p className="text-sm font-medium text-white/80">
-                          Empowering the next generation of Omani technologists
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-[10px] text-white/30 font-mono">
-                          {String(Math.floor(time / 60)).padStart(2, "0")}:
-                          {String(time % 60).padStart(2, "0")}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                  <video
+                    controls
+                    preload="metadata"
+                    playsInline
+                    poster="/images/shuaa-poster.jpg"
+                    className="absolute inset-0 w-full h-full object-contain bg-black"
+                  >
+                    <source src={shuaaContent.videoUrl} type="video/mp4" />
+                  </video>
+                </div>
               </div>
             </motion.div>
           </div>
