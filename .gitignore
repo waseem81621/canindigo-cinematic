@@ -13,3 +13,13 @@ dist/
 # Design reference videos + extracted frames — workspace-only assets,
 # not part of the shipped site. Kept on disk but excluded from git.
 design-refs/
+
+# Workspace audit screenshots — captured during design iteration, not
+# shipped, not reviewed in PRs.
+audit/
+
+# Stray Playwright screenshots dropped at the repo root during ad-hoc
+# spot-checks.
+mobile-*.jpeg
+hero-preview-*.jpeg
+casestudies-locate.jpeg

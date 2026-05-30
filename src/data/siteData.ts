@@ -16,7 +16,7 @@ export const navLinks = [
   { label: "Interiors", href: "/interiors" },
   { label: "Automotive", href: "/automotive" },
   { label: "About", href: "/#about" },
-  { label: "Contact", href: "/#contact" },
+  // Contact removed — duplicated the Consultation CTA (both → /#contact)
 ];
 
 // ─── HERO ───
