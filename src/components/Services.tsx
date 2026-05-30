@@ -5,7 +5,6 @@ import {
   Server,
   Shield,
   Cpu,
-  ArrowRight,
   Wifi,
   Lock,
   Cloud,
@@ -17,8 +16,6 @@ import {
   LifeBuoy,
 } from "lucide-react";
 import { BreathingHeadline } from "./BreathingText";
-import { MagneticButton } from "./MagneticButton";
-import { GlassButton } from "./GlassButton";
 import { ImageReveal } from "./ImageReveal";
 import { CardDeckSpread } from "./CardDeckSpread";
 import { mainServices, detailedServices } from "../data/siteData";
@@ -106,7 +103,7 @@ function ServicePillar({
         index > 0 ? "mt-16 md:mt-24" : ""
       }`}
     >
-      <div ref={imageRef} className={`${isReversed ? "lg:order-2" : ""} opacity-0`}>
+      <div ref={imageRef} className={isReversed ? "lg:order-2" : ""}>
         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
           <ImageReveal
             src={service.image}
@@ -159,12 +156,6 @@ function ServicePillar({
               </li>
             ))}
           </ul>
-
-          <MagneticButton>
-            <GlassButton variant="secondary" size="md" icon={<ArrowRight size={15} />}>
-              Learn more
-            </GlassButton>
-          </MagneticButton>
         </div>
       </div>
     </div>

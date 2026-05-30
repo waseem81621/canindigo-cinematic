@@ -1,8 +1,5 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { MagneticButton } from "./MagneticButton";
-import { GlassButton } from "./GlassButton";
 import { TextScramble } from "./TextScramble";
 import { AuroraBackground } from "./AuroraBackground";
 import { heroContent } from "../data/siteData";
@@ -17,11 +14,6 @@ export function Hero() {
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-  const scrollToContact = () => {
-    const el = document.querySelector("#contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <section
@@ -97,23 +89,6 @@ export function Hero() {
               {heroContent.subheadline}
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: durCalm, delay: 0.9, ease: easeEnter }}
-              className="mt-10 md:mt-12 flex flex-wrap items-center gap-4"
-            >
-              <MagneticButton>
-                <GlassButton
-                  onClick={scrollToContact}
-                  variant="primary"
-                  size="lg"
-                  icon={<ArrowRight size={16} />}
-                >
-                  {heroContent.ctaPrimary}
-                </GlassButton>
-              </MagneticButton>
-            </motion.div>
           </div>
 
         </div>

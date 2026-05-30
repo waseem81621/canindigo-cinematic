@@ -1,8 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { MapPin, Award, Users } from "lucide-react";
-import { StaggerContainer, StaggerItem } from "./AnimatedSection";
-import { TextReveal } from "./TextReveal";
+import { MapPin, Award } from "lucide-react";
 import { aboutContent } from "../data/siteData";
 
 function CounterStat({
@@ -50,16 +48,6 @@ export function About() {
   return (
     <section id="about" className="py-20 md:py-28">
       <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
-        {/* Header */}
-        <div className="mb-14 md:mb-20">
-          <TextReveal
-            className="text-[32px] md:text-[48px] lg:text-[56px] font-bold text-text-primary leading-[1.05] tracking-[-0.02em] max-w-[800px]"
-            delay={0.1}
-          >
-            {aboutContent.headline}
-          </TextReveal>
-        </div>
-
         {/* Stats bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 py-10 mb-14 md:mb-20 border-y border-border/30">
           {aboutContent.stats.map((stat, i) => (
@@ -132,54 +120,6 @@ export function About() {
           </div>
         </div>
 
-        {/* Team */}
-        <div className="mb-12">
-          <h2 className="text-[28px] md:text-[36px] font-bold text-text-primary leading-[1.1] tracking-[-0.01em]">
-            Built by people who care about the details.
-          </h2>
-        </div>
-
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {aboutContent.team.map((member) => (
-            <StaggerItem key={member.name}>
-              <div className="group bg-bg-pure rounded-2xl border border-border p-8 transition-colors duration-300 ease-out hover:border-indigo-accent/40 hover:shadow-[0_8px_30px_-10px_rgba(25,22,45,0.08)]">
-                <div className="w-10 h-10 rounded-lg bg-bg flex items-center justify-center mb-5 transition-colors duration-300 ease-out group-hover:bg-indigo-mid/10">
-                  <Users
-                    size={18}
-                    className="text-text-secondary transition-colors duration-300 ease-out group-hover:text-indigo-mid"
-                    strokeWidth={1.5}
-                  />
-                </div>
-                <h3 className="text-lg font-semibold text-text-primary mb-1 tracking-tight">
-                  {member.name}
-                </h3>
-                <p className="text-[13px] font-medium text-indigo-accent mb-3">
-                  {member.role}
-                </p>
-                <p className="text-[14px] text-text-secondary leading-relaxed">
-                  {member.detail}
-                </p>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-
-        {/* Canadian badge */}
-        <div className="mt-12 md:mt-16">
-          <div className="flex items-center justify-center gap-3 py-6">
-            <div className="w-6 h-4 rounded-sm bg-gradient-to-r from-red-600 to-red-500 relative overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-2 h-2 rounded-full bg-red-700" />
-              </div>
-            </div>
-            <span className="text-[13px] text-text-muted">
-              Proudly backed by{" "}
-              <span className="text-text-secondary font-medium">
-                CanIndigo Canada
-              </span>
-            </span>
-          </div>
-        </div>
       </div>
     </section>
   );

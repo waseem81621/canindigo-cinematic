@@ -25,7 +25,7 @@ export const navLinks = [
 // Dropped secondary CTA to focus the conversion path.
 export const heroContent = {
   eyebrow: "Infrastructure. Intelligence. Indigo.",
-  headline: ["Enterprise IT trusted by", "Oman's most critical", "operations."],
+  headline: ["Sovereign-grade IT", "for Oman's enterprise."],
   subheadline:
     "Managed infrastructure, cybersecurity, and digital transformation — delivered with Canadian discipline and on-the-ground Omani partnership.",
   ctaPrimary: "Request Consultation",
@@ -93,7 +93,7 @@ export const mainServices = [
       "Data analytics & BI",
       "Legacy system modernization",
     ],
-    image: "/images/service-transform.jpg",
+    image: "/images/services/dtpillar.jpg",
     accent: "var(--color-indigo-mid)",
   },
 ];
@@ -265,15 +265,6 @@ export const caseStudies = [
     accentColor: "var(--color-indigo-mid)",
   },
   {
-    client: "Bank Dhofar",
-    category: "Cloud Infrastructure",
-    title: "Bank-grade security without the friction.",
-    description:
-      "Cloud infrastructure management and security compliance deployment, delivered via Omantel.",
-    image: "/images/case-bank.jpg",
-    accentColor: "var(--color-indigo-mid)",
-  },
-  {
     client: "Omantel",
     category: "Managed IT Services",
     title: "Authorised delivery partner for enterprise ICT.",
@@ -286,7 +277,10 @@ export const caseStudies = [
 
 // ─── ABOUT ───
 export const aboutContent = {
-  headline: "Canadian precision. Omani partnership.",
+  // 2026-05-27: tagline removed from rendering; key kept as empty string
+  // so any external references don't break. About section now starts with
+  // the stats bar directly.
+  headline: "",
   paragraphs: [
     "CanIndigo Oman is the local arm of CanIndigo Canada, bringing North American technical standards to the Sultanate's most demanding enterprises. Locally registered as Abu Ayat Modern Trading, we operate as a Riyada SME with full Omani ownership compliance.",
     "Our team combines Canadian engineering discipline with deep understanding of Omani business culture — delivering solutions that work technically and fit institutionally.",
@@ -391,7 +385,9 @@ export const contactContent = {
 
 // ─── FOOTER (Ft5 Statement) ───
 export const footerContent = {
-  statement: "Canadian precision. Omani partnership.",
+  // 2026-05-27: tagline removed from rendering; key kept as empty string.
+  // Footer now opens directly with the brand + contact grid.
+  statement: "",
   companies: [
     "Abu Ayat Modern Trad (A Riyada SME)",
     "Amber Radiance",

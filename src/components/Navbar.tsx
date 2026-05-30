@@ -21,7 +21,9 @@ export function Navbar() {
 
   return (
     <>
-      {/* N5 Floating Pill — logo left, pill of links centred, CTA right */}
+      {/* N5 Floating Pill — logo left, pill of links centred, CTA right.
+          Outer wrapper holds the opaque backdrop strip that fades in on scroll
+          so hero text never bleeds through the navbar. */}
       <motion.nav
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -29,51 +31,59 @@ export function Navbar() {
         className="fixed top-0 left-0 right-0 z-50"
         aria-label="Primary"
       >
-        <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
-          <div className="relative flex items-center justify-between h-24 md:h-28">
-            {/* Logo — always returns to homepage */}
-            <Link
-              to="/"
-              className="flex items-center group relative z-10"
-              aria-label={brand.name}
-            >
-              <img
-                src={brand.logo}
-                alt={brand.name}
-                className="h-16 md:h-20 w-auto object-contain transition-opacity duration-200 ease-out group-hover:opacity-80"
-              />
-            </Link>
-
-            {/* Floating Pill — desktop only, absolutely centred */}
-            <div
-              className={`hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-1 px-2 py-2 rounded-full
-                bg-surface-light/80 backdrop-blur-xl border border-border/60
-                shadow-[0_1px_3px_rgba(25,22,45,0.04),0_4px_24px_rgba(25,22,45,0.04)]
-                transition-colors duration-200 ease-out
-                ${scrolled ? "bg-surface-light/95" : "bg-surface-light/70"}`}
-            >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  className="px-4 py-1.5 text-[13px] font-medium text-text-muted rounded-full hover:text-text-primary hover:bg-bg transition-colors duration-200 ease-out tracking-wide"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-
-            {/* CTA + Mobile Toggle */}
-            <div className="flex items-center gap-4 relative z-10">
+        {/* Opaque backdrop strip — transparent at scroll-top so the hero's
+            aurora bleeds up cleanly; fades in to solid cream + hairline border
+            once scrolled so the giant hero headline can't bleed through. */}
+        <div
+          className={`w-full transition-[background-color,backdrop-filter,border-color] duration-300 ease-out ${
+            scrolled
+              ? "bg-bg/95 backdrop-blur-xl border-b border-border/40"
+              : "bg-transparent border-b border-transparent"
+          }`}
+        >
+          <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
+            <div className="relative flex items-center justify-between h-28 md:h-32">
+              {/* Logo — always returns to homepage */}
               <Link
-                to="/#contact"
-                className="hidden md:inline-flex items-center px-5 py-2 text-[13px] font-medium text-text-primary border border-border rounded-full hover:border-indigo-mid hover:bg-indigo-mid/5 transition-colors duration-200 ease-out"
+                to="/"
+                className="flex items-center group relative z-10"
+                aria-label={brand.name}
               >
-                Consultation
+                <img
+                  src={brand.logo}
+                  alt={brand.name}
+                  className="h-24 md:h-28 w-auto object-contain transition-opacity duration-200 ease-out group-hover:opacity-80"
+                />
               </Link>
+
+              {/* Unified chrome pill — desktop only. Contains nav links +
+                  Consultation CTA together so they read as one navigation
+                  surface (MAS-style). The Consultation segment is visually
+                  separated by a hairline divider and slightly bolder text. */}
+              <div className="hidden md:flex pillow-shell items-center gap-1 px-3 py-2.5 rounded-full relative z-10 font-nav">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="px-5 py-2 text-[15px] font-semibold uppercase text-text-primary/80 rounded-full hover:text-text-primary hover:bg-white/60 transition-colors duration-200 ease-out tracking-[0.08em]"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                {/* Hairline divider between nav and CTA */}
+                <span aria-hidden="true" className="mx-1.5 h-6 w-px bg-text-primary/15" />
+                <Link
+                  to="/#contact"
+                  className="px-5 py-2 text-[15px] font-bold uppercase text-text-primary rounded-full hover:bg-white/60 transition-colors duration-200 ease-out tracking-[0.08em]"
+                >
+                  Consultation
+                </Link>
+              </div>
+
+              {/* Mobile menu toggle */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden p-2 text-text-primary"
+                className="md:hidden p-2 text-text-primary relative z-10"
                 aria-label="Toggle menu"
               >
                 {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -91,7 +101,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-bg/98 backdrop-blur-xl pt-24 md:pt-28 px-6 md:hidden"
+            className="fixed inset-0 z-40 bg-bg/98 backdrop-blur-xl pt-28 md:pt-32 px-6 md:hidden font-nav"
           >
             <div className="flex flex-col gap-1">
               {navLinks.map((link, i) => (
@@ -118,9 +128,9 @@ export function Navbar() {
                 <Link
                   to="/#contact"
                   onClick={closeMobile}
-                  className="mt-6 block w-full py-3 text-center text-sm font-medium text-text-primary border border-indigo-mid rounded-full"
+                  className="mt-6 block w-full py-3 text-center text-sm font-bold text-text-primary border border-indigo-mid rounded-full"
                 >
-                  Request Consultation
+                  Consultation
                 </Link>
               </motion.div>
             </div>

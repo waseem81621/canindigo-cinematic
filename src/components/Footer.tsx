@@ -8,22 +8,15 @@ import { footerContent, brand } from "../data/siteData";
 export function Footer() {
   return (
     <footer className="bg-text-primary text-white/60">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28">
-        {/* Statement — Cormorant Garamond, top-left */}
-        <p
-          className="font-display text-[40px] sm:text-[52px] md:text-[64px] lg:text-[72px] font-medium text-white leading-[1.05] tracking-[-0.02em] max-w-[760px]"
-        >
-          {footerContent.statement}
-        </p>
-
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
         {/* Brand + Contact — two-column on md+, stacked on mobile */}
-        <div className="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 items-center">
           {/* Brand */}
           <div>
             <img
               src={brand.logo}
               alt={brand.name}
-              className="h-20 md:h-24 w-auto object-contain mb-5"
+              className="h-32 md:h-40 w-auto object-contain mb-4 -ml-3 md:-ml-4"
             />
             <ul className="space-y-1">
               {footerContent.companies.map((company) => (
@@ -80,7 +73,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-20 md:mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+        <div className="mt-10 md:mt-12 pt-6 border-t border-white/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <p className="text-[12px] text-white/50">{footerContent.copyright}</p>
           <p className="text-[12px] text-white/50">{footerContent.registration}</p>
         </div>
