@@ -1,5 +1,50 @@
 @import "tailwindcss";
 
+/* Lora (body font) — self-hosted from public/fonts/lora/. Lora is SIL Open
+   Font License (OFL), which permits self-hosting and bundling, so we serve it
+   from our own origin (faster + private, no third-party CDN). It's a calm,
+   readable text serif with a generous x-height — no size-adjust needed. */
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora/Lora-Regular.woff2') format('woff2'),
+       url('/fonts/lora/Lora-Regular.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora/Lora-Italic.woff2') format('woff2'),
+       url('/fonts/lora/Lora-Italic.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora/Lora-Medium.woff2') format('woff2'),
+       url('/fonts/lora/Lora-Medium.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora/Lora-SemiBold.woff2') format('woff2'),
+       url('/fonts/lora/Lora-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/lora/Lora-Bold.woff2') format('woff2'),
+       url('/fonts/lora/Lora-Bold.woff') format('woff');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
 @theme {
   /* Surfaces — light */
   --color-bg: #F8F6F3;             /* page background, warm off-white */
@@ -35,10 +80,12 @@
     var(--color-indigo-light) 100%
   );
 
-  /* Fonts */
-  --font-display: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
-  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-nav: 'Space Grotesk', 'DM Sans', system-ui, -apple-system, sans-serif;
+  /* Fonts — Fontshare API delivers Tanker/Gambarino/Bonny from their CDN
+     (see <link> in index.html). Each stack lists previous font as fallback
+     in case the API request is slow on first paint. */
+  --font-display: 'Gambarino', 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-nav: 'Lora', Georgia, 'Times New Roman', serif;
 }
 
 html {

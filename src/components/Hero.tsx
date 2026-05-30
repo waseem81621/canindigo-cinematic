@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TextScramble } from "./TextScramble";
-import { AuroraBackground } from "./AuroraBackground";
 import { heroContent } from "../data/siteData";
 import { easeEnter, durCalm, durCinematic } from "../utils/motion-tokens";
 
@@ -18,9 +17,29 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[100dvh] flex items-end pt-32 md:pt-40 pb-16 md:pb-28 overflow-hidden"
+      className="relative min-h-[100dvh] flex items-center pt-28 md:pt-32 pb-20 md:pb-24 overflow-hidden"
     >
-      <AuroraBackground />
+      {/* Hero background video (Gemini-generated, text-free). Muted autoplay
+          loop, full-bleed, even across the whole frame — no scrim. The headline
+          and subhead carry their own cream glow (text-shadow) for legibility. */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+      >
+        <source src="/videos/hero-bg.mp4" type="video/mp4" />
+      </video>
+
+      {/* Uniform cream veil — lifts the whole video lighter by the same amount
+          everywhere (no gradient, no asymmetry). Tune via opacity. */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "var(--color-bg)", opacity: 0.35 }}
+      />
+
       <div
         className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{
@@ -42,7 +61,7 @@ export function Hero() {
               transition={{ duration: durCalm, ease: easeEnter }}
               className="mb-6"
             >
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-text-primary/[0.04] border border-text-primary/10">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-bg/70 backdrop-blur-md border border-text-primary/10">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-accent animate-pulse" />
                 <TextScramble
                   text={heroContent.eyebrow}
@@ -57,7 +76,13 @@ export function Hero() {
                 Each line still slides up from below — preserved via per-line
                 motion.spans inside an overflow-hidden wrapper. The last
                 line gets the indigo accent color to emphasize the outcome. */}
-            <h1 className="text-[48px] sm:text-[64px] md:text-[72px] lg:text-[80px] font-bold leading-[1.1] tracking-[-0.03em] pb-[0.05em] break-words">
+            <h1
+              className="text-[48px] sm:text-[64px] md:text-[72px] lg:text-[80px] font-bold leading-[1.1] tracking-[-0.03em] pb-[0.05em] break-words"
+              style={{
+                textShadow:
+                  "0 2px 32px rgba(248,246,243,0.95), 0 0 16px rgba(248,246,243,0.9), 0 0 6px rgba(248,246,243,0.85)",
+              }}
+            >
               {heroContent.headline.map((line, i) => (
                 <span key={i} className="block overflow-hidden">
                   <motion.span
@@ -85,6 +110,10 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: durCalm, delay: 0.7, ease: easeEnter }}
               className="mt-8 md:mt-10 text-lg md:text-xl text-text-secondary max-w-[480px] leading-relaxed font-light"
+              style={{
+                textShadow:
+                  "0 1px 18px rgba(248,246,243,0.95), 0 0 8px rgba(248,246,243,0.9)",
+              }}
             >
               {heroContent.subheadline}
             </motion.p>

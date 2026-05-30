@@ -65,7 +65,7 @@ export function Navbar() {
                   <Link
                     key={link.label}
                     to={link.href}
-                    className="px-5 py-2 text-[15px] font-semibold uppercase text-text-primary/80 rounded-full hover:text-text-primary hover:bg-white/60 transition-colors duration-200 ease-out tracking-[0.08em]"
+                    className="px-5 py-2 text-[17px] font-semibold uppercase text-text-primary/80 rounded-full hover:text-text-primary hover:bg-white/60 transition-colors duration-200 ease-out tracking-[0.1em]"
                   >
                     {link.label}
                   </Link>
@@ -74,7 +74,7 @@ export function Navbar() {
                 <span aria-hidden="true" className="mx-1.5 h-6 w-px bg-text-primary/15" />
                 <Link
                   to="/#contact"
-                  className="px-5 py-2 text-[15px] font-bold uppercase text-text-primary rounded-full hover:bg-white/60 transition-colors duration-200 ease-out tracking-[0.08em]"
+                  className="px-5 py-2 text-[17px] font-bold uppercase text-text-primary rounded-full hover:bg-white/60 transition-colors duration-200 ease-out tracking-[0.1em]"
                 >
                   Consultation
                 </Link>

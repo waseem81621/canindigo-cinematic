@@ -308,7 +308,7 @@ export function AutomotiveDivision() {
                       {c.bullets.map((b) => (
                         <li
                           key={b}
-                          className="flex items-start gap-3 text-[14px] text-text-secondary leading-relaxed"
+                          className="flex items-start gap-3 text-[16px] text-text-secondary leading-relaxed"
                         >
                           <span className="block w-4 h-px bg-indigo-accent mt-2.5 shrink-0" />
                           <span>{b}</span>

@@ -8,7 +8,7 @@ import { footerContent, brand } from "../data/siteData";
 export function Footer() {
   return (
     <footer className="bg-text-primary text-white/60">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 pt-6 md:pt-8 pb-8 md:pb-10">
         {/* Brand + Contact — two-column on md+, stacked on mobile */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 items-center">
           {/* Brand */}
@@ -16,13 +16,13 @@ export function Footer() {
             <img
               src={brand.logo}
               alt={brand.name}
-              className="h-32 md:h-40 w-auto object-contain mb-4 -ml-3 md:-ml-4"
+              className="h-32 md:h-40 w-auto object-contain mb-2 -ml-3 md:-ml-4"
             />
             <ul className="space-y-1">
               {footerContent.companies.map((company) => (
                 <li
                   key={company}
-                  className="text-[13px] text-white/50 leading-relaxed"
+                  className="text-[15px] text-white/50 leading-relaxed"
                 >
                   {company}
                 </li>
@@ -33,7 +33,7 @@ export function Footer() {
           {/* Contact */}
           <div className="md:text-right">
             <p
-              className="text-[14px] text-white/70 leading-relaxed max-w-[320px] md:ml-auto mb-5"
+              className="text-[16px] text-white/70 leading-relaxed max-w-[320px] md:ml-auto mb-5"
             >
               {footerContent.contact.address}
             </p>
@@ -41,7 +41,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${footerContent.contact.email}`}
-                  className="text-[14px] text-white/70 hover:text-white transition-colors duration-200 ease-out"
+                  className="text-[16px] text-white/70 hover:text-white transition-colors duration-200 ease-out"
                 >
                   {footerContent.contact.email}
                 </a>
@@ -49,7 +49,7 @@ export function Footer() {
               <li>
                 <a
                   href={`tel:${footerContent.contact.phone.replace(/\s+/g, "")}`}
-                  className="text-[14px] text-white/70 hover:text-white transition-colors duration-200 ease-out"
+                  className="text-[16px] text-white/70 hover:text-white transition-colors duration-200 ease-out"
                 >
                   {footerContent.contact.phone}
                 </a>
@@ -59,7 +59,7 @@ export function Footer() {
                   href={footerContent.contact.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-1.5 text-[14px] text-white/70 hover:text-white transition-colors duration-200 ease-out"
+                  className="group inline-flex items-center gap-1.5 text-[16px] text-white/70 hover:text-white transition-colors duration-200 ease-out"
                 >
                   WhatsApp
                   <ArrowUpRight
@@ -73,9 +73,9 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 md:mt-12 pt-6 border-t border-white/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <p className="text-[12px] text-white/50">{footerContent.copyright}</p>
-          <p className="text-[12px] text-white/50">{footerContent.registration}</p>
+        <div className="mt-6 md:mt-8 pt-5 border-t border-white/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+          <p className="text-[14px] text-white/50">{footerContent.copyright}</p>
+          <p className="text-[14px] text-white/50">{footerContent.registration}</p>
         </div>
       </div>
     </footer>

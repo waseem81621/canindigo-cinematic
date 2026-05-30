@@ -146,7 +146,7 @@ function ServicePillar({
             {service.features.map((feature) => (
               <li
                 key={feature}
-                className="flex items-center gap-3 text-[14px] text-text-secondary"
+                className="flex items-center gap-3 text-[16px] md:text-[17px] text-text-secondary"
               >
                 <span
                   className="w-1.5 h-1.5 rounded-full shrink-0"
