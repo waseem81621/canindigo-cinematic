@@ -45,6 +45,9 @@ export function BoutiqueApps() {
 
     return {
       id: app.id,
+      // Accessible name matches the visible H3 (`app.name`) so the card
+      // button passes axe's label-in-name check.
+      ariaLabel: app.name,
       content: (
         <div className="relative w-full h-full overflow-hidden">
           {/* Background: app screenshot if available, otherwise the indigo

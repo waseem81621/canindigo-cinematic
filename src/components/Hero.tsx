@@ -21,8 +21,10 @@ export function Hero() {
       className="relative min-h-[100dvh] flex items-center pt-28 md:pt-32 pb-20 md:pb-24 overflow-hidden"
     >
       {/* Hero background video (Gemini-generated, text-free). Muted autoplay
-          loop, full-bleed, even across the whole frame — no scrim. The headline
-          and subhead carry their own cream glow (text-shadow) for legibility. */}
+          loop, full-bleed, even across the whole frame. A uniform cream veil
+          at 35% (below) lifts the video lighter — that's the scrim — and the
+          headline + subhead carry their own cream glow (text-shadow) for the
+          legibility lift. */}
       <video
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         autoPlay

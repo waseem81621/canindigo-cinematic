@@ -26,6 +26,11 @@ interface CardDeckCard {
   id?: string;
   /** Background color or gradient for the card. Falls back to indigo. */
   accentColor?: string;
+  /** Accessible name for the card button. Must match (or include) the
+   *  visible text inside `content` so axe's "label-in-name" rule passes.
+   *  Falls back to `Card N` only if a caller forgets — log-shaming, not a
+   *  feature. */
+  ariaLabel?: string;
   /** Content rendered inside the card. */
   content: React.ReactNode;
 }
@@ -108,7 +113,7 @@ export function CardDeck({
             onMouseLeave={handleLeave}
             onFocus={() => handleEnter(i)}
             onBlur={handleLeave}
-            aria-label={`Card ${i + 1}`}
+            aria-label={card.ariaLabel ?? `Card ${i + 1}`}
             className="absolute top-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-mid focus-visible:ring-offset-4 focus-visible:ring-offset-bg"
             style={{
               left,

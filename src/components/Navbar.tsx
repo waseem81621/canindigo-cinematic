@@ -41,7 +41,7 @@ export function Navbar() {
               : "bg-transparent border-b border-transparent"
           }`}
         >
-          <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
+          <div className="max-w-[1280px] mx-auto px-6 md:px-8 lg:px-20">
             <div className="relative flex items-center justify-between h-28 md:h-32">
               {/* Logo — always returns to homepage */}
               <Link
@@ -52,7 +52,7 @@ export function Navbar() {
                 <img
                   src={brand.logo}
                   alt={brand.name}
-                  className="h-24 md:h-28 w-auto object-contain transition-opacity duration-200 ease-out group-hover:opacity-80"
+                  className="h-20 md:h-24 lg:h-28 w-auto object-contain transition-opacity duration-200 ease-out group-hover:opacity-80"
                 />
               </Link>
 
@@ -60,12 +60,12 @@ export function Navbar() {
                   Consultation CTA together so they read as one navigation
                   surface (MAS-style). The Consultation segment is visually
                   separated by a hairline divider and slightly bolder text. */}
-              <div className="hidden md:flex pillow-shell items-center gap-1 px-3 py-2.5 rounded-full relative z-10 font-nav">
+              <div className="hidden md:flex pillow-shell items-center gap-0.5 lg:gap-1 px-2 py-2 lg:px-3 lg:py-2.5 rounded-full relative z-10 font-nav">
                 {navLinks.map((link) => (
                   <Link
                     key={link.label}
                     to={link.href}
-                    className="px-5 py-2 text-[17px] font-semibold uppercase text-text-primary/80 rounded-full hover:text-text-primary hover:bg-white/60 transition-colors duration-200 ease-out tracking-[0.1em]"
+                    className="px-3 py-1.5 text-[14px] lg:px-5 lg:py-2 lg:text-[17px] font-semibold uppercase text-text-primary/80 rounded-full hover:text-text-primary hover:bg-white/60 transition-colors duration-200 ease-out tracking-[0.1em]"
                   >
                     {link.label}
                   </Link>
@@ -74,7 +74,7 @@ export function Navbar() {
                 <span aria-hidden="true" className="mx-1.5 h-6 w-px bg-text-primary/15" />
                 <Link
                   to="/#contact"
-                  className="px-5 py-2 text-[17px] font-bold uppercase text-text-primary rounded-full hover:bg-white/60 transition-colors duration-200 ease-out tracking-[0.1em]"
+                  className="px-3 py-1.5 text-[14px] lg:px-5 lg:py-2 lg:text-[17px] font-bold uppercase text-text-primary rounded-full hover:bg-white/60 transition-colors duration-200 ease-out tracking-[0.1em]"
                 >
                   Consultation
                 </Link>
