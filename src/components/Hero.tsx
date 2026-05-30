@@ -4,7 +4,9 @@ import { ArrowRight } from "lucide-react";
 import { MagneticButton } from "./MagneticButton";
 import { GlassButton } from "./GlassButton";
 import { TextScramble } from "./TextScramble";
+import { AuroraBackground } from "./AuroraBackground";
 import { heroContent } from "../data/siteData";
+import { easeEnter, durCalm, durCinematic } from "../utils/motion-tokens";
 
 export function Hero() {
   const containerRef = useRef<HTMLElement>(null);
@@ -21,29 +23,12 @@ export function Hero() {
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
-  const scrollToServices = () => {
-    const el = document.querySelector("#services");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section
       ref={containerRef}
       className="relative min-h-[100dvh] flex items-end pt-32 md:pt-40 pb-16 md:pb-28 overflow-hidden"
     >
-      {/* Subtle indigo gradient glow behind the headline — 12% opacity */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          top: "20%",
-          left: "0",
-          width: "70%",
-          height: "60%",
-          background: "var(--gradient-brand)",
-          opacity: 0.12,
-          filter: "blur(120px)",
-        }}
-      />
+      <AuroraBackground />
       <div
         className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{
@@ -62,7 +47,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const }}
+              transition={{ duration: durCalm, ease: easeEnter }}
               className="mb-6"
             >
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-text-primary/[0.04] border border-text-primary/10">
@@ -76,9 +61,10 @@ export function Hero() {
               </span>
             </motion.div>
 
-            {/* Single semantic <h1> containing all three headline words.
-                Each word still slides up from below — preserved via per-line
-                motion.spans inside an overflow-hidden wrapper. */}
+            {/* Single semantic <h1> containing all three headline lines.
+                Each line still slides up from below — preserved via per-line
+                motion.spans inside an overflow-hidden wrapper. The last
+                line gets the indigo accent color to emphasize the outcome. */}
             <h1 className="text-[48px] sm:text-[64px] md:text-[72px] lg:text-[80px] font-bold leading-[1.1] tracking-[-0.03em] pb-[0.05em] break-words">
               {heroContent.headline.map((line, i) => (
                 <span key={i} className="block overflow-hidden">
@@ -86,9 +72,9 @@ export function Hero() {
                     initial={{ y: "100%" }}
                     animate={{ y: 0 }}
                     transition={{
-                      duration: 1,
+                      duration: durCinematic,
                       delay: 0.2 + i * 0.15,
-                      ease: [0.25, 0.1, 0.25, 1] as const,
+                      ease: easeEnter,
                     }}
                     className={`block ${
                       i === heroContent.headline.length - 1
@@ -105,7 +91,7 @@ export function Hero() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] as const }}
+              transition={{ duration: durCalm, delay: 0.7, ease: easeEnter }}
               className="mt-8 md:mt-10 text-lg md:text-xl text-text-secondary max-w-[480px] leading-relaxed font-light"
             >
               {heroContent.subheadline}
@@ -114,7 +100,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9, ease: [0.25, 0.1, 0.25, 1] as const }}
+              transition={{ duration: durCalm, delay: 0.9, ease: easeEnter }}
               className="mt-10 md:mt-12 flex flex-wrap items-center gap-4"
             >
               <MagneticButton>
@@ -127,15 +113,6 @@ export function Hero() {
                   {heroContent.ctaPrimary}
                 </GlassButton>
               </MagneticButton>
-              <MagneticButton>
-                <GlassButton
-                  onClick={scrollToServices}
-                  variant="ghost"
-                  size="lg"
-                >
-                  {heroContent.ctaSecondary}
-                </GlassButton>
-              </MagneticButton>
             </motion.div>
           </div>
 
@@ -144,7 +121,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
+          transition={{ delay: 1.5, duration: durCinematic }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
         >
           <span className="text-[10px] font-medium text-text-muted uppercase tracking-[0.2em]">

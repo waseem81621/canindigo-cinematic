@@ -20,11 +20,14 @@ export const navLinks = [
 ];
 
 // ─── HERO ───
+// 2026-05-26 (Phase 2.1): Demoted alliteration to eyebrow, replaced headline
+// with outcome-led copy that puts the value prop in the first 2 seconds.
+// Dropped secondary CTA to focus the conversion path.
 export const heroContent = {
-  eyebrow: "Enterprise Technology Partner",
-  headline: ["Infrastructure.", "Intelligence.", "Indigo."],
+  eyebrow: "Infrastructure. Intelligence. Indigo.",
+  headline: ["Enterprise IT trusted by", "Oman's most critical", "operations."],
   subheadline:
-    "Managed IT & cybersecurity for Oman's most demanding enterprises. Canadian precision, Omani partnership.",
+    "Managed infrastructure, cybersecurity, and digital transformation — delivered with Canadian discipline and on-the-ground Omani partnership.",
   ctaPrimary: "Request Consultation",
   ctaSecondary: "Explore Services",
 };
@@ -40,6 +43,16 @@ export const partners = [
   { name: "Omantel", logo: "/images/Omantel_Logo.png" },
   { name: "Shell", logo: "/images/Shell-Logo.png" },
   { name: "Artelia", logo: "/images/logo_ARTELIA_Couleur.png" },
+];
+
+// ─── HERO TRUST BAR ───
+// Named enterprise clients shown under the hero CTA. Trimmed to Shell +
+// Omantel only — Bank Dhofar, Royal Flight, and Oman Broadband are
+// delivered under the Omantel contract, so listing them separately would
+// double-count. They still appear as their own case studies further down.
+export const heroClients = [
+  { name: "Shell", logo: "/images/Shell-Logo.png" },
+  { name: "Omantel", logo: "/images/Omantel_Logo.png" },
 ];
 
 // ─── SERVICES (MAIN PILLARS) ───
@@ -86,64 +99,79 @@ export const mainServices = [
 ];
 
 // ─── SERVICES (DETAILED) ───
+// `image` is rendered inside the CardDeckSpread component. These are
+// local photos in /public/images/services/. To swap any one, drop a
+// new image into that folder and update the path here.
 export const detailedServices = [
   {
     icon: "Wifi",
     title: "Managed Wi-Fi",
     tagline: "Seamless connectivity for stadiums, palaces, and oil fields.",
     clients: "Royal Flight — Salalah & Sohar",
+    image: "/images/services/wifi.jpg",
   },
   {
     icon: "Lock",
     title: "Security Operations Center",
     tagline: "Cloud security and compliance management for enterprise banking clients.",
     clients: "Bank Dhofar",
+    image: "/images/services/soc.jpg",
   },
   {
     icon: "Cloud",
     title: "Cloud Architecture",
     tagline: "Scalable, secure cloud environments built for Omani compliance.",
     clients: "Shell Oman, Omantel",
+    image: "/images/services/cloud.jpg",
   },
   {
     icon: "BarChart3",
     title: "IT Strategy Consulting",
     tagline: "Technology roadmaps aligned with your five-year business goals.",
     clients: "Riyada SME portfolio companies",
+    image: "/images/services/strategy.jpg",
   },
   {
     icon: "Globe",
     title: "Offshore Resources",
     tagline: "Extended engineering capacity from Canada and beyond. Certified talent on-demand.",
     clients: "Available across all enterprise tiers",
+    image: "/images/services/offshore.jpg",
   },
   {
     icon: "Database",
     title: "ERP Development",
     tagline: "Custom ERP builds for finance, inventory, procurement, and operations — from scoping to go-live.",
     clients: "See ERP under Boutique Apps",
+    image: "/images/services/erp.jpg",
   },
   {
     icon: "HardDrive",
     title: "In-house Data Centre",
     tagline: "On-premises server infrastructure at our Muscat facility, currently hosting enterprise asset management and ticketing systems for oil & gas clients.",
     clients: "Oil & gas enterprise",
+    image: "/images/services/datacenter.jpg",
   },
   {
     icon: "Package",
     title: "Asset Management",
     tagline: "Track and govern every device, license, and contract across your estate.",
     clients: "Available across all enterprise tiers",
+    image: "/images/services/assets.jpg",
   },
   {
     icon: "LifeBuoy",
     title: "Ticketing System",
     tagline: "Service-desk platform deployment and managed support operations.",
     clients: "Available across all enterprise tiers",
+    image: "/images/services/ticketing.jpg",
   },
 ];
 
 // ─── BOUTIQUE APPS ───
+// `image` is the card background screenshot shown in the BoutiqueApps
+// CardDeck. Set to null for any app without a screenshot — the card will
+// fall back to the indigo brand gradient (used for the Coming Soon entry).
 export const boutiqueApps = [
   {
     id: "hr",
@@ -156,6 +184,7 @@ export const boutiqueApps = [
     accent: "var(--color-indigo-mid)",
     span: "large" as const,
     comingSoon: false as const,
+    image: "/images/apps/hr.jpg" as string | null,
   },
   {
     id: "erp",
@@ -168,6 +197,7 @@ export const boutiqueApps = [
     accent: "var(--color-indigo-mid)",
     span: "normal" as const,
     comingSoon: false as const,
+    image: "/images/apps/erp.jpg" as string | null,
   },
   {
     id: "pms",
@@ -180,6 +210,7 @@ export const boutiqueApps = [
     accent: "var(--color-indigo-mid)",
     span: "normal" as const,
     comingSoon: false as const,
+    image: "/images/apps/pms.jpg" as string | null,
   },
   {
     id: "zamtech",
@@ -192,6 +223,7 @@ export const boutiqueApps = [
     accent: "var(--color-indigo-mid)",
     span: "normal" as const,
     comingSoon: false as const,
+    image: "/images/apps/sme.jpg" as string | null,
   },
   {
     id: "fleet",
@@ -204,6 +236,7 @@ export const boutiqueApps = [
     accent: "var(--color-indigo-mid)",
     span: "normal" as const,
     comingSoon: false as const,
+    image: "/images/apps/fleet.jpg" as string | null,
   },
   {
     id: "vatwps",
@@ -216,6 +249,7 @@ export const boutiqueApps = [
     accent: "var(--color-indigo-mid)",
     span: "wide" as const,
     comingSoon: true as const,
+    image: null as string | null,
   },
 ];
 

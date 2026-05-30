@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, ReactNode } from "react";
+import { easeEnter } from "../utils/motion-tokens";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -44,7 +45,7 @@ export function AnimatedSection({
       transition={{
         duration,
         delay,
-        ease: [0.25, 0.1, 0.25, 1],
+        ease: easeEnter,
       }}
       className={className}
     >
@@ -103,7 +104,7 @@ export function StaggerItem({
           y: 0,
           transition: {
             duration: 0.6,
-            ease: [0.25, 0.1, 0.25, 1],
+            ease: easeEnter,
           },
         },
       }}

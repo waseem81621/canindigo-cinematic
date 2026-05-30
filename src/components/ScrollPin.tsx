@@ -18,6 +18,7 @@ export function ScrollPin({ children, className = "", pinDuration = 1 }: ScrollP
     const section = sectionRef.current;
     const content = contentRef.current;
     if (!section || !content) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -62,6 +63,7 @@ export function HorizontalScroll({ children, className = "" }: HorizontalScrollP
     const container = containerRef.current;
     const track = trackRef.current;
     if (!container || !track) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const cards = track.children;
     const totalWidth = track.scrollWidth - container.offsetWidth;

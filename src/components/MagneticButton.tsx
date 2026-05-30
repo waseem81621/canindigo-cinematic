@@ -48,8 +48,13 @@ export function MagneticButton({
     animate: { x: position.x, y: position.y },
     transition: {
       type: "spring" as const,
-      stiffness: 350,
-      damping: 15,
+      // Phase 3.1 (2026-05-26): tuned from stiffness 350 / damping 15 to
+      // stiffness 250 / damping 25. The old config was underdamped
+      // (~0.4 damping ratio) and visibly wobbled on hover-release —
+      // reads as flair-over-rigor for an enterprise consultancy. New
+      // config is critically damped: pulls smoothly, settles instantly.
+      stiffness: 250,
+      damping: 25,
       mass: 0.5,
     },
     className,

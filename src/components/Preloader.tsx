@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { easeEnter, easeExit } from "../utils/motion-tokens";
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -43,20 +44,20 @@ export function Preloader({ onComplete }: PreloaderProps) {
           className="fixed inset-0 z-[9999] bg-bg flex flex-col items-center justify-center"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.2, ease: easeExit }}
         >
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.6, ease: easeEnter }}
             className="flex items-center gap-3 mb-12"
           >
             <motion.div
               className="w-10 h-10 rounded-xl bg-text-primary flex items-center justify-center"
               initial={{ scale: 0.8, rotate: -10 }}
               animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 0.8, ease: easeEnter }}
             >
               <span className="text-bg-pure font-bold text-sm">CI</span>
             </motion.div>

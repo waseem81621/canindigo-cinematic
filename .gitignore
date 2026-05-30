@@ -9,3 +9,7 @@ dist/
 .env.production.local
 .hallmark/
 .playwright-mcp/
+
+# Design reference videos + extracted frames — workspace-only assets,
+# not part of the shipped site. Kept on disk but excluded from git.
+design-refs/

@@ -12,8 +12,8 @@ export function HomePage() {
   return (
     <main>
       <Hero />
-      <VerticalsSelector />
       <ClientStrip />
+      <VerticalsSelector />
       <section id="ict">
         <Services />
         <BoutiqueApps />

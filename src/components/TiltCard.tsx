@@ -21,9 +21,13 @@ export function TiltCard({
     const rect = ref.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
+    // Phase 3.2 (2026-05-26): clamp rotation to ±8° hard cap. The
+    // multiplier (tiltAmount × 2 × 0.5) keeps default behavior unchanged
+    // but caps any future caller that passes a larger tiltAmount.
+    const clamp = (v: number) => Math.max(-8, Math.min(8, v));
     setRotate({
-      x: y * -tiltAmount * 2,
-      y: x * tiltAmount * 2,
+      x: clamp(y * -tiltAmount * 2),
+      y: clamp(x * tiltAmount * 2),
     });
   };
 
@@ -39,7 +43,8 @@ export function TiltCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       className={`relative ${className}`}
-      style={{ perspective: 1000 }}
+      // Phase 3.2: 1000 → 1400px softens the 3D depth, more restrained.
+      style={{ perspective: 1400 }}
       animate={{
         rotateX: rotate.x,
         rotateY: rotate.y,

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { MotionConfig } from "framer-motion";
 import Lenis from "lenis";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
@@ -22,7 +23,11 @@ function App() {
     if (prefersReduced) return;
 
     const lenis = new Lenis({
-      duration: 1.2,
+      // Phase 3.3 (2026-05-26): 1.2 → 0.9. The longer duration made fast
+      // wheel-scroll feel like it kept coasting after the user stopped.
+      // 0.9s keeps the buttery feel without the "drunk" coast — power
+      // users (the audience here) get more direct response.
+      duration: 0.9,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       touchMultiplier: 2,
     });
@@ -40,7 +45,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <ScrollToTop />
       {!loaded && <Preloader onComplete={() => setLoaded(true)} />}
       <div className={`min-h-screen bg-bg transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}>
@@ -55,7 +60,7 @@ function App() {
         </PageTransition>
         <Footer />
       </div>
-    </>
+    </MotionConfig>
   );
 }
 

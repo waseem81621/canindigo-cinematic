@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
 import {
   Users,
   Building2,
@@ -8,13 +6,11 @@ import {
   Truck,
   Receipt,
   ArrowUpRight,
-  ExternalLink,
 } from "lucide-react";
-import { StaggerContainer, StaggerItem } from "./AnimatedSection";
-import { TiltCard } from "./TiltCard";
+import { CardDeck } from "./CardDeck";
 import { boutiqueApps } from "../data/siteData";
 
-const iconMap: Record<string, React.ComponentType<any>> = {
+const iconMap: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>> = {
   Users,
   Building2,
   ClipboardList,
@@ -23,244 +19,109 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   Receipt,
 };
 
-function GlowingLine({ active }: { active: boolean }) {
-  return (
-    <svg
-      className="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-visible"
-      preserveAspectRatio="none"
-    >
-      <defs>
-        <filter id="lineGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2.5" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-        {/* Stops use the indigo palette inline — SVG stop-color attrs don't reliably accept var(--*) */}
-        <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#3C248C" stopOpacity="0.9" />
-          <stop offset="50%" stopColor="#8A6DE8" stopOpacity="1" />
-          <stop offset="100%" stopColor="#3C248C" stopOpacity="0.9" />
-        </linearGradient>
-      </defs>
-      <motion.path
-        d="M 48 72 C 80 72, 100 90, 130 110 S 200 140, 280 160"
-        stroke="url(#lineGrad)"
-        strokeWidth="1.5"
-        fill="none"
-        filter="url(#lineGlow)"
-        strokeLinecap="round"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={
-          active
-            ? { pathLength: 1, opacity: 1 }
-            : { pathLength: 0, opacity: 0 }
-        }
-        transition={{ duration: 0.7, ease: "easeInOut" }}
-      />
-      {active && (
-        <motion.circle
-          r="2.5"
-          fill="#8A6DE8"
-          filter="url(#lineGlow)"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 1, 1, 0] }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
-        >
-          <animateMotion
-            dur="0.7s"
-            repeatCount="1"
-            path="M 48 72 C 80 72, 100 90, 130 110 S 200 140, 280 160"
-          />
-        </motion.circle>
-      )}
-    </svg>
-  );
-}
+/**
+ * 2026-05-26 (v2): Boutique Apps section rebuilt around CardDeck.
+ *
+ * The earlier StudioShowcaseStack pass overlapped cards too aggressively
+ * with text-heavy content — the middle of the fan became an unreadable
+ * pile-up, and the hover zones between overlapping cards caused flicker
+ * (cursor crossing two cards toggled `hoveredIndex` rapidly between them).
+ *
+ * CardDeck solves both: each card peeks a fixed amount from behind the
+ * previous one (~18% of width), so the visible hover strip per card is
+ * its own column with no overlap fighting. Hover any card and it lifts
+ * straight UP — the others stay put — so there's no chain-reaction or
+ * cross-talk between adjacent hover zones.
+ *
+ * Sized for 6 cards: 280×400 each, total deck ~531px wide (well inside
+ * the 1280px container). Coming-Soon WPS/VAT card gets a "Coming Soon"
+ * pill instead of the live-demo button.
+ */
+export function BoutiqueApps() {
+  const cards = boutiqueApps.map((app) => {
+    const Icon = iconMap[app.icon];
+    const isComingSoon = app.comingSoon === true;
+    const hasImage = !!app.image;
 
-function AppCard({ app }: { app: (typeof boutiqueApps)[0] }) {
-  const [hovered, setHovered] = useState(false);
-  const Icon = iconMap[app.icon];
-  const isLarge = app.span === "large";
-  const isWide = app.span === "wide";
-  const isComingSoon = app.comingSoon === true;
+    return {
+      id: app.id,
+      content: (
+        <div className="relative w-full h-full overflow-hidden">
+          {/* Background: app screenshot if available, otherwise the indigo
+              gradient supplied by CardDeck (no extra layer needed since
+              the CardDeck parent paints the gradient). */}
+          {hasImage && (
+            <img
+              src={app.image as string}
+              alt={`${app.name} screenshot`}
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover"
+              onError={(e) => {
+                // If image fails, hide it so the gradient shows through.
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
+            />
+          )}
 
-  return (
-    <TiltCard
-      className={`group relative block rounded-2xl overflow-hidden transition-colors duration-300 ease-out
-        ${isLarge ? "md:row-span-2" : ""}
-        ${isWide ? "md:col-span-2" : ""}
-      `}
-      tiltAmount={6}
-    >
-      <CardShell isComingSoon={isComingSoon} href={app.href} onHover={setHovered}>
-        <div
-          className={`relative h-full min-h-[200px] md:min-h-[220px] p-6 md:p-8 flex flex-col justify-between
-            bg-white/60 backdrop-blur-xl border border-white/40
-            transition-colors duration-300 ease-out
-            ${isComingSoon ? "" : "group-hover:bg-white/75 group-hover:border-white/60 group-hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.12)]"}`}
-          style={{
-            boxShadow: hovered && !isComingSoon
-              ? `0 20px 60px -15px ${app.accent}20, inset 0 1px 0 rgba(255,255,255,0.5)`
-              : "inset 0 1px 0 rgba(255,255,255,0.3)",
-          }}
-        >
+          {/* Dark gradient at the bottom for text legibility over the image.
+              When there's no image, the indigo gradient already provides
+              enough contrast — but the dark overlay helps with the icon
+              badge readability too, so we keep it light on gradient cards. */}
           <div
-            className="absolute -top-20 -right-20 w-40 h-40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-[60px]"
-            style={{ backgroundColor: app.accent }}
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: hasImage
+                ? "linear-gradient(to top, rgba(25,22,45,0.92) 0%, rgba(25,22,45,0.55) 45%, rgba(25,22,45,0.15) 100%)"
+                : "linear-gradient(to top, rgba(25,22,45,0.35) 0%, rgba(25,22,45,0.10) 50%, transparent 100%)",
+            }}
           />
 
-          <GlowingLine active={hovered} />
-
-          <div className="relative z-10">
-            <div className="flex items-start justify-between mb-4">
-              <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center transition-colors duration-300 ease-out
-                  bg-text-primary/5 group-hover:shadow-lg"
-                style={{
-                  boxShadow: hovered
-                    ? `0 4px 20px color-mix(in srgb, ${app.accent} 30%, transparent)`
-                    : "none",
-                }}
-              >
-                {Icon && (
-                  <Icon
-                    size={20}
-                    className="transition-colors duration-500"
-                    style={{
-                      color: hovered ? app.accent : "var(--color-text-muted)",
-                    }}
-                    strokeWidth={1.5}
-                  />
-                )}
+          {/* Foreground content */}
+          <div className="relative h-full flex flex-col justify-between p-6 md:p-7 text-white">
+            {/* Top: icon + status pill */}
+            <div className="flex items-start justify-between">
+              <div className="w-11 h-11 rounded-xl bg-white/15 backdrop-blur-md flex items-center justify-center border border-white/20">
+                {Icon && <Icon size={20} strokeWidth={1.5} className="text-white" />}
               </div>
-              {!isComingSoon && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={
-                    hovered
-                      ? { opacity: 1, scale: 1 }
-                      : { opacity: 0, scale: 0.8 }
-                  }
-                  transition={{ duration: 0.3 }}
-                  className="w-8 h-8 rounded-full bg-text-primary/5 flex items-center justify-center"
-                >
-                  <ExternalLink size={14} className="text-text-muted" />
-                </motion.div>
+              {isComingSoon && (
+                <span className="px-2.5 py-1 rounded-full text-[9px] font-semibold uppercase tracking-[0.15em] bg-white/15 backdrop-blur-sm border border-white/20">
+                  Soon
+                </span>
               )}
             </div>
 
-            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-text-muted mb-1.5">
-              {app.subtitle}
-            </p>
-            <h3
-              className={`font-bold text-text-primary tracking-tight transition-colors duration-500
-                ${isLarge ? "text-2xl md:text-3xl" : "text-xl md:text-2xl"}
-                group-hover:text-text-primary`}
-            >
-              {app.name}
-            </h3>
-          </div>
+            {/* Bottom: subtitle + name + description + CTA */}
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/80 mb-1.5">
+                {app.subtitle}
+              </p>
+              <h3 className="text-[22px] md:text-2xl font-bold tracking-tight leading-[1.1] mb-3">
+                {app.name}
+              </h3>
+              <p className="text-[11px] md:text-[12px] text-white/90 leading-snug mb-4 line-clamp-3">
+                {app.description}
+              </p>
 
-          <div className="relative z-10 mt-4">
-            <p
-              className={`text-text-secondary leading-relaxed mb-5 transition-colors duration-300 ease-out
-                ${isLarge ? "text-[15px] max-w-[320px]" : "text-[14px]"}
-                ${isWide ? "max-w-[500px]" : "max-w-[280px]"}`}
-            >
-              {app.description}
-            </p>
-
-            <div className="flex items-center gap-2">
-              <span
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[12px] font-semibold
-                  border transition-colors duration-300 ease-out"
-                style={{
-                  borderColor:
-                    hovered && !isComingSoon ? app.accent : "var(--color-border)",
-                  color:
-                    hovered && !isComingSoon ? app.accent : "var(--color-text-muted)",
-                  backgroundColor:
-                    hovered && !isComingSoon
-                      ? `color-mix(in srgb, ${app.accent} 8%, transparent)`
-                      : "transparent",
-                }}
-              >
-                {isComingSoon ? (
-                  "Coming Soon"
-                ) : (
-                  <>
-                    View Live Demo
-                    <ArrowUpRight
-                      size={13}
-                      className="transition-transform duration-300"
-                      style={{
-                        transform: hovered ? "translate(1px, -1px)" : "none",
-                      }}
-                    />
-                  </>
-                )}
-              </span>
+              {!isComingSoon && app.href !== "#" && (
+                <a
+                  href={app.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-semibold bg-white text-indigo-mid hover:bg-white/95 transition-colors"
+                >
+                  View Live Demo
+                  <ArrowUpRight size={11} />
+                </a>
+              )}
             </div>
           </div>
-
-          <div
-            className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-            style={{
-              boxShadow: `inset 0 0 0 1px ${app.accent}30, 0 0 40px ${app.accent}10`,
-            }}
-          />
         </div>
-      </CardShell>
-    </TiltCard>
-  );
-}
+      ),
+    };
+  });
 
-/**
- * Renders an <a> for live apps, a non-interactive <div> for coming-soon ones.
- * Coming-soon cards never become a link, so Lighthouse doesn't flag them as
- * dead anchors, and they don't show up in the page's outbound-link graph.
- */
-function CardShell({
-  isComingSoon,
-  href,
-  onHover,
-  children,
-}: {
-  isComingSoon: boolean;
-  href: string;
-  onHover: (v: boolean) => void;
-  children: React.ReactNode;
-}) {
-  if (isComingSoon) {
-    return (
-      <div
-        aria-disabled="true"
-        onMouseEnter={() => onHover(true)}
-        onMouseLeave={() => onHover(false)}
-        className="block h-full"
-      >
-        {children}
-      </div>
-    );
-  }
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      onMouseEnter={() => onHover(true)}
-      onMouseLeave={() => onHover(false)}
-      className="block h-full"
-    >
-      {children}
-    </a>
-  );
-}
-
-export function BoutiqueApps() {
   return (
     <section className="py-20 md:py-28 relative overflow-hidden">
       <div className="absolute inset-0 bg-bg" />
@@ -281,32 +142,18 @@ export function BoutiqueApps() {
           <p className="mt-5 text-[17px] text-text-secondary leading-relaxed max-w-[560px]">
             Six production-ready platforms. Each crafted for a specific
             operational need — deployed, maintained, and supported by our team.
+            Hover any card to lift it.
           </p>
         </div>
 
-        <StaggerContainer
-          className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-5"
-          staggerDelay={0.08}
-        >
-          <StaggerItem className="md:col-span-2 md:row-span-2">
-            <AppCard app={boutiqueApps[0]} />
-          </StaggerItem>
-          <StaggerItem className="md:col-span-2">
-            <AppCard app={boutiqueApps[1]} />
-          </StaggerItem>
-          <StaggerItem className="md:col-span-2">
-            <AppCard app={boutiqueApps[2]} />
-          </StaggerItem>
-          <StaggerItem className="md:col-span-2">
-            <AppCard app={boutiqueApps[3]} />
-          </StaggerItem>
-          <StaggerItem className="md:col-span-2">
-            <AppCard app={boutiqueApps[4]} />
-          </StaggerItem>
-          <StaggerItem className="md:col-span-4">
-            <AppCard app={boutiqueApps[5]} />
-          </StaggerItem>
-        </StaggerContainer>
+        <CardDeck
+          cards={cards}
+          cardWidth={280}
+          cardHeight={400}
+          step={0.6}
+          hoverLift={36}
+          borderRadius={20}
+        />
       </div>
     </section>
   );

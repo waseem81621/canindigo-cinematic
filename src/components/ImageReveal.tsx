@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { easeEnter } from "../utils/motion-tokens";
 
 interface ImageRevealProps {
   src: string;
@@ -53,7 +54,7 @@ export function ImageReveal({
         transition={{
           duration,
           delay,
-          ease: [0.25, 0.1, 0.25, 1],
+          ease: easeEnter,
         }}
       >
         <motion.img
@@ -65,7 +66,7 @@ export function ImageReveal({
           transition={{
             duration: duration * 1.3,
             delay: delay + 0.1,
-            ease: [0.25, 0.1, 0.25, 1],
+            ease: easeEnter,
           }}
         />
       </motion.div>

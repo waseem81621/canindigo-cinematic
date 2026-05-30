@@ -225,3 +225,63 @@ h1, h2, h3, h4 {
     transparent 100%
   );
 }
+
+/* Hero aurora — two indigo blobs drifting in opposite directions.
+   ~30s loop. Translation only (no scale/opacity changes) so it's
+   GPU-cheap. prefers-reduced-motion pauses both blobs in place. */
+@keyframes auroraDrift1 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(12%, 8%);
+  }
+}
+
+@keyframes auroraDrift2 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-10%, -6%);
+  }
+}
+
+.aurora-blob-1 {
+  animation: auroraDrift1 32s ease-in-out infinite;
+}
+
+.aurora-blob-2 {
+  animation: auroraDrift2 28s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob-1,
+  .aurora-blob-2 {
+    animation: none;
+  }
+}
+
+/* Carousel3D — auto-rotating 3D ring of cards. Duration is set per-
+   instance via the --carousel-3d-duration custom property (default 20s).
+   Hover pause is handled by the component via Tailwind's
+   hover:[animation-play-state:paused]. Reduced-motion disables rotation. */
+@keyframes carousel3dRotate {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.carousel-3d-spinner {
+  animation: carousel3dRotate var(--carousel-3d-duration, 20s) linear infinite;
+  transform-style: preserve-3d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-3d-spinner {
+    animation: none;
+  }
+}

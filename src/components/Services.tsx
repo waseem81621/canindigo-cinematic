@@ -1,5 +1,4 @@
 import { useRef, useEffect } from "react";
-import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -17,11 +16,11 @@ import {
   Package,
   LifeBuoy,
 } from "lucide-react";
-import { StaggerContainer, StaggerItem } from "./AnimatedSection";
 import { BreathingHeadline } from "./BreathingText";
 import { MagneticButton } from "./MagneticButton";
 import { GlassButton } from "./GlassButton";
 import { ImageReveal } from "./ImageReveal";
+import { CardDeckSpread } from "./CardDeckSpread";
 import { mainServices, detailedServices } from "../data/siteData";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -59,6 +58,7 @@ function ServicePillar({
     const image = imageRef.current;
     const content = contentRef.current;
     if (!section || !image || !content) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -177,6 +177,7 @@ export function Services() {
   useEffect(() => {
     const header = headerRef.current;
     if (!header) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -218,51 +219,23 @@ export function Services() {
         </div>
 
         <div className="mt-20 md:mt-28">
-          <div className="mb-12">
+          <div className="mb-10 md:mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             <h2 className="text-[28px] md:text-[36px] font-bold text-text-primary leading-[1.1] tracking-[-0.01em]">
               Tailored for your environment.
             </h2>
+            <p className="text-[13px] text-text-muted hidden md:block">
+              Hover any card to expand.
+            </p>
           </div>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {detailedServices.map((service) => {
-              const Icon = iconMap[service.icon];
-              return (
-                <StaggerItem key={service.title}>
-                  <motion.div
-                    className="group flex items-center gap-5 md:gap-8 bg-bg-pure rounded-2xl border border-border p-7 md:p-8 transition-colors duration-300 ease-out hover:border-indigo-accent/30 hover:shadow-[0_8px_30px_-10px_rgba(25,22,45,0.08)]"
-                    whileHover={{ x: 4 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-bg flex items-center justify-center shrink-0 transition-colors duration-300 ease-out group-hover:bg-indigo-mid/10">
-                      {Icon && (
-                        <Icon
-                          size={22}
-                          className="text-text-secondary transition-colors duration-300 ease-out group-hover:text-indigo-mid"
-                          strokeWidth={1.5}
-                        />
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg font-semibold text-text-primary mb-1 tracking-tight">
-                        {service.title}
-                      </h3>
-                      <p className="text-[14px] text-text-secondary leading-relaxed">
-                        {service.tagline}
-                      </p>
-                      <p className="mt-1.5 text-[11px] text-text-muted">
-                        {service.clients}
-                      </p>
-                    </div>
-                    <ArrowRight
-                      size={18}
-                      className="hidden md:block text-text-muted/30 group-hover:text-indigo-mid group-hover:translate-x-1 transition-colors duration-300 ease-out shrink-0"
-                    />
-                  </motion.div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
+          <CardDeckSpread
+            cards={detailedServices.map((svc) => ({
+              src: svc.image,
+              alt: svc.title,
+              title: svc.title,
+              subtitle: svc.tagline,
+            }))}
+          />
         </div>
       </div>
     </section>

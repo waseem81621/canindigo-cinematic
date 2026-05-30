@@ -1,53 +1,71 @@
 import { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-} from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { partners } from "../data/siteData";
+import { easeEnter, durCalm } from "../utils/motion-tokens";
 
+/**
+ * 2026-05-27: Rebuilt as a static "Trusted Technology Partners" section.
+ *
+ * Previously this was a scrolling marquee of duplicated client logos under
+ * the hero. That treatment now lives in the hero trust bar itself
+ * (`<HeroTrustBar />` after the CTAs), so duplicating it here was
+ * redundant and noisy.
+ *
+ * This new version is a calm partner-row treatment: heading on top, then
+ * a centered horizontal row of partner logos separated by thin vertical
+ * dividers — visually similar to the "Trusted Technology Partners" pattern
+ * the user referenced, but on the cream site background (not dark) so it
+ * fits the surrounding sections.
+ *
+ * The logos render in the brand's grayscale-on-rest / color-on-hover
+ * treatment used elsewhere in the site.
+ */
 export function ClientStrip() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const shouldReduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
-  const duplicated = [...partners, ...partners, ...partners, ...partners];
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <motion.section
-      ref={containerRef}
-      style={{ opacity }}
-      className="py-14 md:py-20 border-y border-border/30 overflow-hidden"
+    <section
+      ref={ref}
+      className="py-16 md:py-24 border-y border-border/40"
     >
-      <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 mb-8">
-        <p className="text-[11px] font-medium text-text-muted uppercase tracking-[0.2em] text-center">
-          Trusted by Oman&apos;s leading organizations
-        </p>
-      </div>
-
-      <div className="overflow-hidden py-3">
-        <motion.div
-          className="flex items-center gap-16 md:gap-24 whitespace-nowrap"
-          animate={shouldReduceMotion ? undefined : { x: ["0%", "-25%"] }}
-          transition={{
-            x: { duration: 40, repeat: Infinity, ease: "linear" },
-          }}
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
+        {/* Heading — eyebrow only, no subhead. The 3 logos beneath carry the
+            visual weight. */}
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+          transition={{ duration: durCalm, ease: easeEnter }}
+          className="text-[11px] font-semibold text-indigo-mid uppercase tracking-[0.25em] text-center mb-10 md:mb-14"
         >
-          {duplicated.map((partner, i) => (
-            <img
-              key={`${partner.name}-${i}`}
-              src={partner.logo}
-              alt={partner.name}
-              className="h-10 md:h-12 w-auto shrink-0 object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
-            />
+          Trusted Technology Partners
+        </motion.p>
+
+        {/* Partner logos — equal-width cells separated by thin dividers */}
+        <div className="grid grid-cols-3 gap-0 border-t border-b border-border/50">
+          {partners.map((partner, i) => (
+            <motion.div
+              key={partner.name}
+              initial={{ opacity: 0, y: 8 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+              transition={{
+                duration: durCalm,
+                delay: 0.15 + i * 0.08,
+                ease: easeEnter,
+              }}
+              className={`flex items-center justify-center py-10 md:py-14 px-6 ${
+                i < partners.length - 1 ? "border-r border-border/50" : ""
+              }`}
+            >
+              <img
+                src={partner.logo}
+                alt={partner.name}
+                className="h-10 md:h-12 w-auto object-contain grayscale opacity-55 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+              />
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

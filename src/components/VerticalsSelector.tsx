@@ -34,7 +34,7 @@ const verticals = [
     // TODO Phase 5.5: replace <a> with <Link to={href}> from react-router-dom
     kind: "route" as const,
     imageAlt: "Warm timber-clad interior detail",
-    imageSrc: "/images/verticals/interiors-timber-ceiling.jpg" as string | null,
+    imageSrc: "/images/verticals/intdec.jpg" as string | null,
   },
   {
     number: "Division 03",
