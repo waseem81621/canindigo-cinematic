@@ -402,6 +402,14 @@ export const footerContent = {
   registration: "Riyada SME Registered",
 };
 
+// ─── SOCIAL ───
+export const socialLinks = [
+  { platform: "facebook", label: "Facebook", href: "https://www.facebook.com/profile.php?id=61558178726117" },
+  { platform: "instagram", label: "Instagram", href: "https://www.instagram.com/can.indigo_solutions" },
+  { platform: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/company/can-indigo-solutions-inc/" },
+  { platform: "youtube", label: "YouTube", href: "https://www.youtube.com/@Can.IndigoSolutionsInc-kh4lm" },
+] as const;
+
 // ─── PRELOADER ───
 export const preloaderContent = {
   logoText: "CanIndigo",

@@ -1,9 +1,9 @@
 import { ArrowUpRight } from "lucide-react";
-import { footerContent, brand } from "../data/siteData";
+import { footerContent, brand, socialLinks } from "../data/siteData";
+import { SocialIcon } from "./SocialIcons";
 
 /**
- * Ft5 Statement footer — one statement line + logo + contact block.
- * No link columns, no social icons, no dead # links.
+ * Ft5 Statement footer — logo + contact block + social links.
  */
 export function Footer() {
   return (
@@ -69,6 +69,22 @@ export function Footer() {
                 </a>
               </li>
             </ul>
+
+            {/* Social links */}
+            <div className="mt-6 flex items-center gap-1 md:justify-end">
+              {socialLinks.map((s) => (
+                <a
+                  key={s.platform}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="inline-flex items-center justify-center w-9 h-9 rounded-full text-white/60 hover:text-white hover:bg-white/5 transition-colors duration-200 ease-out"
+                >
+                  <SocialIcon platform={s.platform} size={18} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
