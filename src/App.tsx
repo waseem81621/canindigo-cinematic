@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
 import Lenis from "lenis";
@@ -13,9 +13,18 @@ import { PageTransition } from "./components/PageTransition";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { ScrollProgressBar } from "./components/ScrollProgressBar";
 import { HomePage } from "./pages/HomePage";
-import { InteriorsPage } from "./pages/InteriorsPage";
-import { AutomotivePage } from "./pages/AutomotivePage";
-import { NotFoundPage } from "./pages/NotFoundPage";
+
+// Route code-split — /interiors, /automotive, and the 404 page are pulled
+// out of the homepage bundle. Wrapped in Suspense at the <Routes> level.
+const InteriorsPage = lazy(() =>
+  import("./pages/InteriorsPage").then((m) => ({ default: m.InteriorsPage }))
+);
+const AutomotivePage = lazy(() =>
+  import("./pages/AutomotivePage").then((m) => ({ default: m.AutomotivePage }))
+);
+const NotFoundPage = lazy(() =>
+  import("./pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage }))
+);
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -69,12 +78,14 @@ function App() {
         <ScrollProgressBar thickness={3} />
         <Navbar />
         <PageTransition>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/interiors" element={<InteriorsPage />} />
-            <Route path="/automotive" element={<AutomotivePage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/interiors" element={<InteriorsPage />} />
+              <Route path="/automotive" element={<AutomotivePage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
         </PageTransition>
         <Footer />
       </div>

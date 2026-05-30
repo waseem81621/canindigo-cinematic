@@ -15,4 +15,18 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  build: {
+    // Split heavy vendor libs into their own chunks so the homepage app
+    // chunk stops crossing the 500 KB warning and these vendors cache
+    // independently between route navigations.
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "react-vendor": ["react", "react-dom", "react-router-dom"],
+          "motion-vendor": ["framer-motion", "lenis"],
+          "gsap-vendor": ["gsap"],
+        },
+      },
+    },
+  },
 });
