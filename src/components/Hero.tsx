@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TextScramble } from "./TextScramble";
+import { NodeNetwork } from "./NodeNetwork";
 import { heroContent } from "../data/siteData";
 import { easeEnter, durCalm, durCinematic } from "../utils/motion-tokens";
 
@@ -49,6 +50,16 @@ export function Hero() {
           backgroundSize: "80px 80px",
         }}
       />
+
+      {/* IT node-network: drifting constellation in the empty left area.
+          Sits above the cream veil (z 0) and below the text content (z 10).
+          Hidden on mobile — text fills that space there. */}
+      <div
+        className="absolute inset-y-0 left-0 w-1/2 pointer-events-none z-[5] hidden lg:block"
+        aria-hidden="true"
+      >
+        <NodeNetwork className="w-full h-full" />
+      </div>
 
       <motion.div
         style={{ y, opacity }}
