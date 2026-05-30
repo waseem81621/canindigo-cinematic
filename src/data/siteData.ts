@@ -340,14 +340,14 @@ export const shuaaContent = {
 export const contactContent = {
   headline: "Request a confidential consultation.",
   description:
-    "Every engagement begins with understanding. Share your context, and we'll respond within two hours with next steps.",
+    "Every engagement begins with understanding. Share your context, and we'll respond within 1–2 business days with next steps.",
   info: [
     { icon: "Mail", label: "Email", value: "sales@can-indigo.com" },
     { icon: "Phone", label: "Phone", value: "+968 98540055" },
     {
       icon: "Clock",
       label: "Response Time",
-      value: "Under 2 hours during business hours",
+      value: "1–2 business days",
     },
     { icon: "MapPin", label: "Office", value: "Muscat, Sultanate of Oman" },
   ],
@@ -373,7 +373,7 @@ export const contactContent = {
     ],
     submitLabel: "Submit Request",
     privacyNote:
-      "Your information is kept strictly confidential. We respond via email or WhatsApp within one business day.",
+      "Your information is kept strictly confidential. We respond via email or WhatsApp within 1–2 business days.",
     successTitle: "Thank you.",
     successMessage:
       "We've received your enquiry and will be in touch shortly via email or WhatsApp.",
@@ -393,7 +393,7 @@ export const footerContent = {
     "Amber Radiance",
   ],
   contact: {
-    address: "Bait Al Falaj St, PC 112, Muscat, Sultanate of Oman",
+    address: "Bait Al Falaj St, PC 112, Muscat,\nSultanate of Oman",
     email: "sales@can-indigo.com",
     phone: "+968 98540055",
     whatsappHref,

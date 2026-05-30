@@ -33,7 +33,7 @@ export function Footer() {
           {/* Contact */}
           <div className="md:text-right">
             <p
-              className="text-[16px] text-white/70 leading-relaxed max-w-[320px] md:ml-auto mb-5"
+              className="text-[16px] text-white/70 leading-relaxed max-w-[320px] md:ml-auto mb-5 whitespace-pre-line"
             >
               {footerContent.contact.address}
             </p>
