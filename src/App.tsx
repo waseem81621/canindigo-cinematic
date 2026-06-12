@@ -6,6 +6,10 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Mobile browsers fire resize when the URL bar collapses/expands during
+// scroll; recomputing every pin on each of those is both janky and wrong.
+ScrollTrigger.config({ ignoreMobileResize: true });
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Preloader } from "./components/Preloader";
@@ -13,6 +17,7 @@ import { PageTransition } from "./components/PageTransition";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { ScrollProgressBar } from "./components/ScrollProgressBar";
 import { HomePage } from "./pages/HomePage";
+import { setLenis } from "./utils/lenis-store";
 
 // Route code-split — /interiors, /automotive, and the 404 page are pulled
 // out of the homepage bundle. Wrapped in Suspense at the <Routes> level.
@@ -53,6 +58,7 @@ function App() {
     // initial (often opacity:0) state. The Services pillar image columns hit
     // exactly this bug. Pattern from https://lenis.darkroom.engineering/
     lenis.on("scroll", ScrollTrigger.update);
+    setLenis(lenis);
 
     function raf(time: number) {
       lenis.raf(time);
@@ -65,7 +71,16 @@ function App() {
     // positions now that Lenis is the scroll driver.
     ScrollTrigger.refresh();
 
+    // Pins measure their positions when created — anything that shifts layout
+    // afterwards (web font swap, late images) silently breaks every pin's
+    // start/end. Re-measure on both signals.
+    document.fonts?.ready.then(() => ScrollTrigger.refresh());
+    const onLoad = () => ScrollTrigger.refresh();
+    window.addEventListener("load", onLoad);
+
     return () => {
+      window.removeEventListener("load", onLoad);
+      setLenis(null);
       lenis.destroy();
     };
   }, []);
@@ -73,7 +88,16 @@ function App() {
   return (
     <MotionConfig reducedMotion="user">
       <ScrollToTop />
-      {!loaded && <Preloader onComplete={() => setLoaded(true)} />}
+      {!loaded && (
+        <Preloader
+          onComplete={() => {
+            setLoaded(true);
+            // The app content was fading in behind the preloader; pins must
+            // re-measure now that the real layout is interactive.
+            ScrollTrigger.refresh();
+          }}
+        />
+      )}
       <div className={`min-h-screen bg-bg transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}>
         <ScrollProgressBar thickness={3} />
         <Navbar />

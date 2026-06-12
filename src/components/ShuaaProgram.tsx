@@ -54,7 +54,7 @@ export function ShuaaProgram() {
                 <div className="relative aspect-video overflow-hidden">
                   <video
                     controls
-                    preload="metadata"
+                    preload="none"
                     playsInline
                     poster="/images/shuaa-poster.jpg"
                     className="absolute inset-0 w-full h-full object-contain bg-black"
