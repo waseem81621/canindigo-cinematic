@@ -28,7 +28,7 @@ export function Navbar() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: easeEnter }}
-        className="fixed top-0 left-0 right-0 z-50"
+        className="theme-chrome fixed top-0 left-0 right-0 z-50"
         aria-label="Primary"
       >
         {/* Opaque backdrop strip — transparent at scroll-top so the hero's
@@ -52,7 +52,7 @@ export function Navbar() {
                 <img
                   src={brand.logo}
                   alt={brand.name}
-                  className="h-20 md:h-24 lg:h-28 w-auto object-contain transition-opacity duration-200 ease-out group-hover:opacity-80"
+                  className="brand-logo h-20 md:h-24 lg:h-28 w-auto object-contain transition-opacity duration-200 ease-out group-hover:opacity-80"
                 />
               </Link>
 
@@ -101,7 +101,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-bg/98 backdrop-blur-xl pt-28 md:pt-32 px-6 md:hidden font-nav"
+            className="theme-chrome fixed inset-0 z-40 bg-bg/98 backdrop-blur-xl pt-28 md:pt-32 px-6 md:hidden font-nav"
           >
             <div className="flex flex-col gap-1">
               {navLinks.map((link, i) => (

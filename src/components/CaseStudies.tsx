@@ -212,7 +212,8 @@ export function CaseStudies() {
   >(null);
 
   return (
-    <section id="case-studies" className="py-20 md:py-28 bg-bg-pure">
+    // Transparent over ActBackground — sits inside the dark act.
+    <section id="case-studies" className="py-20 md:py-28">
       <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
         <div className="mb-12 md:mb-16">
           <h2 className="text-[32px] md:text-[42px] lg:text-[48px] font-semibold text-text-primary leading-[1.1] tracking-[-0.01em] max-w-[600px]">

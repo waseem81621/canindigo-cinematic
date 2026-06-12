@@ -98,7 +98,10 @@ function App() {
           }}
         />
       )}
-      <div className={`min-h-screen bg-bg transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}>
+      {/* No bg here — body carries the cream, and the homepage's fixed
+          ActBackground layer (z -1) must not be buried under an opaque
+          wrapper background. */}
+      <div className={`min-h-screen transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}>
         <ScrollProgressBar thickness={3} />
         <Navbar />
         <PageTransition>

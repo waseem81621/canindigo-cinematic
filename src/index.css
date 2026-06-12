@@ -347,6 +347,63 @@ h1, h2, h3, h4 {
   );
 }
 
+/* ════════════ ACT THEMING (cinematic three-act rebuild) ════════════ */
+
+/* Dark-act scope. Tailwind v4 utilities resolve their color at use-site via
+   CSS variables, so remapping the tokens on this one class flips every
+   text-text-primary / bg-bg-pure / border-border utility inside the act —
+   no per-element dark classes needed. Sections inside stay transparent;
+   the fixed ActBackground layer provides the actual dark surface. */
+.act-dark {
+  --color-bg: var(--color-bg-dark);
+  --color-bg-pure: var(--color-surface-dark);
+  --color-surface-light: var(--color-surface-dark);
+  --color-text-primary: var(--color-text-light);
+  --color-text-secondary: #b8b2c8; /* secondary on dark — muted lavender */
+  --color-text-muted: #8e87a3;
+  --color-border: var(--color-border-dark);
+}
+
+/* ActBackground skips scrubbing under reduced motion — the act paints its
+   own opaque background instead so dark text never lands on dark. */
+@media (prefers-reduced-motion: reduce) {
+  .act-dark {
+    background-color: var(--color-bg-dark);
+  }
+}
+
+/* Fixed chrome (navbar etc.) flips with the acts. html[data-theme] has a
+   single writer: ActBackground.tsx. Same token-remap trick, scoped to the
+   chrome that floats above both light and dark acts. */
+html[data-theme="dark"] .theme-chrome {
+  --color-bg: var(--color-surface-dark);
+  --color-bg-pure: var(--color-surface-dark);
+  --color-text-primary: var(--color-text-light);
+  --color-border: var(--color-border-dark);
+}
+/* The logo (indigo disc + white lettering) already carries its own contrast
+   on dark — no filter needed in either theme. */
+/* The silver pillow pill reads blown-out on dark — swap to dark glass. */
+.theme-chrome .pillow-shell {
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+html[data-theme="dark"] .theme-chrome .pillow-shell {
+  background: linear-gradient(
+    180deg,
+    rgba(82, 72, 128, 0.95) 0%,
+    rgba(46, 38, 78, 0.95) 100%
+  );
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+html[data-theme="dark"] .theme-chrome .pillow-shell::before {
+  background: linear-gradient(150deg, #221b3e 0%, #1a1530 100%);
+}
+html[data-theme="dark"] .theme-chrome .pillow-shell a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

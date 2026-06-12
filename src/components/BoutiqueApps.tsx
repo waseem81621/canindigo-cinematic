@@ -126,8 +126,8 @@ export function BoutiqueApps() {
   });
 
   return (
+    // Transparent over ActBackground — the dark act provides the surface.
     <section className="py-20 md:py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-bg" />
       <div
         className="absolute inset-0 opacity-[0.015]"
         style={{
