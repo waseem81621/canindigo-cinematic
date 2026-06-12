@@ -45,6 +45,23 @@ export const partners = [
   { name: "Artelia", logo: "/images/logo_ARTELIA_Couleur.png" },
 ];
 
+// ─── THESIS (Act I manifesto — pinned scroll scene) ───
+// The "why us" the site never stated: why Oman + why the Canadian/Omani
+// hybrid. Rendered word-by-word, scrubbed to scroll. Segments marked
+// `accent` get the indigo treatment.
+export const thesisContent = {
+  eyebrow: "Why CanIndigo",
+  statement: [
+    { text: "Enterprise IT is a trust business. We build the" },
+    { text: "Canadian way", accent: true },
+    { text: "— disciplined, documented, accountable — and deliver the" },
+    { text: "Omani way:", accent: true },
+    { text: "on the ground, answerable in person." },
+  ],
+  punch: "Two flags. One standard.",
+  coda: "The standard Shell, Omantel, and Artelia already rely on.",
+};
+
 // ─── HERO TRUST BAR ───
 // Named enterprise clients shown under the hero CTA. Trimmed to Shell +
 // Omantel only — Bank Dhofar, Royal Flight, and Oman Broadband are

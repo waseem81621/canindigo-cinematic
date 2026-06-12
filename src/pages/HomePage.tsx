@@ -1,5 +1,6 @@
 import { Hero } from "../components/Hero";
 import { ActBackground } from "../components/ActBackground";
+import { ThesisManifesto } from "../components/ThesisManifesto";
 import { VerticalsSelector } from "../components/VerticalsSelector";
 import { Services } from "../components/Services";
 import { BoutiqueApps } from "../components/BoutiqueApps";
@@ -17,10 +18,10 @@ export function HomePage() {
 
       {/* ───────── ACT I — ARRIVAL (cream) ───────── */}
       <Hero />
-      {/* ClientStrip retired — the partner logos return as the proof coda
-          inside the Thesis manifesto (Act I, Phase 3). Data stays in
-          siteData.partners. */}
-      {/* Phase 3: <ThesisManifesto /> lands here. */}
+      {/* The thesis: why Oman, why the Canadian+Omani hybrid — pinned,
+          word-by-word scrub. Absorbs the retired ClientStrip's logos as
+          its proof coda. */}
+      <ThesisManifesto />
       <VerticalsSelector />
 
       {/* Act I → II boundary. Phase 4 replaces this marker with the pinned

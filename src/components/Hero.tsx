@@ -15,6 +15,14 @@ export function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+  // Scrubbed exit choreography — the hero "dissolves into the brand" as the
+  // visitor leaves: the cream veil thickens toward the page surface, the
+  // video pushes in slightly, and the first/last headline lines shear apart.
+  const veilOpacity = useTransform(scrollYProgress, [0, 0.7], [0.35, 0.9]);
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
+  const shearLeft = useTransform(scrollYProgress, [0, 1], [0, -48]);
+  const shearRight = useTransform(scrollYProgress, [0, 1], [0, 56]);
+
   return (
     <section
       ref={containerRef}
@@ -25,23 +33,29 @@ export function Hero() {
           at 35% (below) lifts the video lighter — that's the scrim — and the
           headline + subhead carry their own cream glow (text-shadow) for the
           legibility lift. */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="/images/hero-poster.jpg"
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{ scale: videoScale }}
         aria-hidden="true"
       >
-        <source src="/videos/hero-bg.mp4" type="video/mp4" />
-      </video>
+        <video
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/images/hero-poster.jpg"
+        >
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        </video>
+      </motion.div>
 
       {/* Uniform cream veil — lifts the whole video lighter by the same amount
-          everywhere (no gradient, no asymmetry). Tune via opacity. */}
-      <div
+          everywhere. Rests at 0.35; thickens to 0.9 on scroll-exit so the
+          hero hands off to the cream act surface. */}
+      <motion.div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: "var(--color-bg)", opacity: 0.35 }}
+        style={{ background: "var(--color-bg)", opacity: veilOpacity }}
       />
 
       <div
@@ -98,7 +112,20 @@ export function Hero() {
               }}
             >
               {heroContent.headline.map((line, i) => (
-                <span key={i} className="block overflow-hidden">
+                // Shear x lives on the overflow-hidden mask (not the sliding
+                // inner span) so text never clips against its own mask while
+                // drifting apart on exit.
+                <motion.span
+                  key={i}
+                  className="block overflow-hidden"
+                  style={
+                    i === 0
+                      ? { x: shearLeft }
+                      : i === heroContent.headline.length - 1
+                        ? { x: shearRight }
+                        : undefined
+                  }
+                >
                   <motion.span
                     initial={{ y: "100%" }}
                     animate={{ y: 0 }}
@@ -115,7 +142,7 @@ export function Hero() {
                   >
                     {line}
                   </motion.span>
-                </span>
+                </motion.span>
               ))}
             </h1>
 

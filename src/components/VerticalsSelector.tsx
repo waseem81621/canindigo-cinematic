@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { LineReveal } from "./TextReveal";
+import { easeEnter } from "../utils/motion-tokens";
 
 /**
  * VerticalsSelector — "Three divisions. One standard."
@@ -53,18 +56,22 @@ export function VerticalsSelector() {
     <section className="py-20 md:py-28">
       <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
         <div className="mb-12 md:mb-16 max-w-[680px]">
-          <h2 className="text-[32px] md:text-[42px] lg:text-[48px] font-semibold text-text-primary leading-[1.1] tracking-[-0.01em]">
-            Three divisions. One standard.
-          </h2>
-          <p className="mt-5 text-[17px] text-text-secondary leading-relaxed">
-            From enterprise IT systems to executive interiors to corporate
-            vehicle maintenance — built and operated under one Riyada SME
-            registration.
-          </p>
+          <LineReveal direction="up">
+            <h2 className="text-[32px] md:text-[42px] lg:text-[48px] font-semibold text-text-primary leading-[1.1] tracking-[-0.01em]">
+              Three divisions. One standard.
+            </h2>
+          </LineReveal>
+          <LineReveal direction="up" delay={0.12}>
+            <p className="mt-5 text-[17px] text-text-secondary leading-relaxed">
+              From enterprise IT systems to executive interiors to corporate
+              vehicle maintenance — built and operated under one Riyada SME
+              registration.
+            </p>
+          </LineReveal>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-          {verticals.map((v) => {
+          {verticals.map((v, i) => {
             const cardClass =
               "group relative block aspect-[4/5] rounded-2xl overflow-hidden border border-border bg-bg-pure transition-colors duration-300 ease-out hover:border-indigo-accent/40";
 
@@ -108,14 +115,35 @@ export function VerticalsSelector() {
               </>
             );
 
-            return v.kind === "route" ? (
-              <Link key={v.number} to={v.href} className={cardClass}>
-                {cardInner}
-              </Link>
-            ) : (
-              <a key={v.number} href={v.href} className={cardClass}>
-                {cardInner}
-              </a>
+            // Staggered clip-path wipe — each card opens from a slightly
+            // inset frame while rising. The wipe lives on a wrapper so the
+            // card's own hover transitions stay untouched.
+            return (
+              <motion.div
+                key={v.number}
+                initial={{
+                  opacity: 0,
+                  y: 32,
+                  clipPath: "inset(10% 6% 10% 6% round 24px)",
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                  clipPath: "inset(0% 0% 0% 0% round 16px)",
+                }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.9, delay: i * 0.12, ease: easeEnter }}
+              >
+                {v.kind === "route" ? (
+                  <Link to={v.href} className={cardClass}>
+                    {cardInner}
+                  </Link>
+                ) : (
+                  <a href={v.href} className={cardClass}>
+                    {cardInner}
+                  </a>
+                )}
+              </motion.div>
             );
           })}
         </div>
