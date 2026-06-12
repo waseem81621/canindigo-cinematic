@@ -4,25 +4,35 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const CREAM = "#F8F6F3"; // --color-bg
-const DARK = "#15102A"; //  --color-bg-dark
+export const ACT_BG_ID = "act-bg";
+export const ACT_COLORS = {
+  cream: "#F8F6F3", // --color-bg
+  dark: "#15102A", //  --color-bg-dark
+} as const;
+
+/** Flip the chrome theme. Writers: ActBackground (plain markers) and pinned
+ *  boundary scenes like TheDescent (inside their own scrub timelines). */
+export function setActTheme(theme: "light" | "dark") {
+  document.documentElement.dataset.theme = theme;
+}
 
 /**
  * The page's color story — Act I (cream) → Act II (dark) → Act III (cream).
  *
- * A fixed full-viewport layer that sits behind all homepage content and
- * scrubs its background color as the visitor crosses `[data-act-boundary]`
- * marker elements rendered by HomePage. Markers declare their destination
- * (`data-act-boundary="dark" | "light"`) and may override the scrub window
- * with `data-act-start` / `data-act-end` (ScrollTrigger position strings).
+ * A fixed full-viewport layer behind all homepage content. Boundaries are
+ * `[data-act-boundary="dark"|"light"]` markers rendered by HomePage (or by
+ * the boundary scenes themselves):
  *
- * Also the SINGLE WRITER of `html[data-theme]`, which fixed chrome (navbar,
- * progress bar) uses to flip its palette at each boundary's midpoint.
- * Nothing else may touch that attribute — one writer, no fights.
+ * - Plain markers: ActBackground scrubs the layer across the marker's
+ *   viewport travel (`data-act-start`/`data-act-end` override the window)
+ *   and flips `html[data-theme]` at the midpoint.
+ * - `data-act-owned="true"` markers: a pinned scene (TheDescent) drives the
+ *   layer inside its own pinned timeline on desktop — perfect sync with its
+ *   choreography. ActBackground binds these markers only in the mobile
+ *   context, where the scene doesn't pin.
  *
- * Mounted inside HomePage (not App) so its lifecycle is tied to the route
- * that owns the markers. Reduced motion: no scrubbing — `.act-dark` sections
- * paint their own opaque background via the media query in index.css.
+ * Reduced motion: nothing scrubs — `.act-dark` sections paint their own
+ * opaque background via the media query in index.css.
  */
 export function ActBackground() {
   const ref = useRef<HTMLDivElement>(null);
@@ -32,20 +42,28 @@ export function ActBackground() {
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const ctx = gsap.context(() => {
+    const bindMarkers = (includeOwned: boolean) => {
       const markers = gsap.utils.toArray<HTMLElement>("[data-act-boundary]");
-      let from = CREAM;
+      let from: string = ACT_COLORS.cream;
 
       markers.forEach((marker) => {
-        const to = marker.dataset.actBoundary === "dark" ? DARK : CREAM;
+        const to =
+          marker.dataset.actBoundary === "dark"
+            ? ACT_COLORS.dark
+            : ACT_COLORS.cream;
+        const tweenFrom = from;
+        from = to; // chain continues across ALL markers, bound or not
+
+        if (marker.dataset.actOwned === "true" && !includeOwned) return;
+
         gsap.fromTo(
           el,
-          { backgroundColor: from },
+          { backgroundColor: tweenFrom },
           {
             backgroundColor: to,
             ease: "none",
-            // Without this, the later boundary's `from` state would paint
-            // immediately on load and stomp the earlier one.
+            // Without this, a later boundary's `from` would paint on load
+            // and stomp the earlier one.
             immediateRender: false,
             scrollTrigger: {
               trigger: marker,
@@ -54,28 +72,35 @@ export function ActBackground() {
               scrub: true,
               onUpdate: (self) => {
                 const pastMidpoint = self.progress > 0.5;
-                document.documentElement.dataset.theme =
-                  (to === DARK) === pastMidpoint ? "dark" : "light";
+                setActTheme(
+                  (to === ACT_COLORS.dark) === pastMidpoint ? "dark" : "light"
+                );
               },
             },
           }
         );
-        from = to;
       });
-    });
+    };
+
+    const mm = gsap.matchMedia();
+    // Desktop: pinned boundary scenes own their markers.
+    mm.add("(min-width: 1024px)", () => bindMarkers(false));
+    // Below lg: scenes don't pin, so ActBackground drives every boundary.
+    mm.add("(max-width: 1023.98px)", () => bindMarkers(true));
 
     return () => {
-      ctx.revert();
+      mm.revert();
       delete document.documentElement.dataset.theme;
     };
   }, []);
 
   return (
     <div
+      id={ACT_BG_ID}
       ref={ref}
       aria-hidden="true"
       className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: -1, backgroundColor: CREAM }}
+      style={{ zIndex: -1, backgroundColor: ACT_COLORS.cream }}
     />
   );
 }

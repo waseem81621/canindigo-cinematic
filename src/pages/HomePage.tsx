@@ -1,6 +1,7 @@
 import { Hero } from "../components/Hero";
 import { ActBackground } from "../components/ActBackground";
 import { ThesisManifesto } from "../components/ThesisManifesto";
+import { TheDescent } from "../components/TheDescent";
 import { VerticalsSelector } from "../components/VerticalsSelector";
 import { Services } from "../components/Services";
 import { BoutiqueApps } from "../components/BoutiqueApps";
@@ -24,9 +25,10 @@ export function HomePage() {
       <ThesisManifesto />
       <VerticalsSelector />
 
-      {/* Act I → II boundary. Phase 4 replaces this marker with the pinned
-          TheDescent scene (the scene carries the data attribute itself). */}
-      <div data-act-boundary="dark" className="h-px" aria-hidden="true" />
+      {/* Act I → II boundary — the pinned submersion scene. Carries its own
+          data-act-boundary marker (owned: ActBackground only binds it below
+          lg, where the scene doesn't pin). */}
+      <TheDescent />
 
       {/* ───────── ACT II — ENGINE ROOM (dark) ─────────
           .act-dark remaps the design tokens for everything inside (see

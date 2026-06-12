@@ -18,6 +18,7 @@ import {
 import { BreathingHeadline } from "./BreathingText";
 import { ImageReveal } from "./ImageReveal";
 import { CardDeckSpread } from "./CardDeckSpread";
+import { PillarChapters } from "./PillarChapters";
 import { mainServices, detailedServices } from "../data/siteData";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -193,7 +194,7 @@ export function Services() {
   }, []);
 
   return (
-    <section id="services" className="py-20 md:py-28 overflow-x-hidden">
+    <section id="services" className="py-20 md:py-28">
       <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
         <div ref={headerRef} className="mb-14 md:mb-20">
           <div className="gsap-reveal">
@@ -202,13 +203,26 @@ export function Services() {
             </BreathingHeadline>
           </div>
         </div>
+      </div>
 
-        <div>
+      {/* Desktop cinematic pinned chapters — full-bleed stage. The CSS gate
+          (lg + motion-safe) matches PillarChapters' own gsap.matchMedia, so
+          a display:none stage is never pinned. */}
+      <div className="hidden lg:motion-safe:block">
+        <PillarChapters />
+      </div>
+
+      {/* Mobile / reduced-motion fallback — the original alternating
+          pillar layout. */}
+      <div className="lg:motion-safe:hidden overflow-x-hidden">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
           {mainServices.map((service, i) => (
             <ServicePillar key={service.title} service={service} index={i} />
           ))}
         </div>
+      </div>
 
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
         <div className="mt-20 md:mt-28">
           <div className="mb-10 md:mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-3">
             <h2 className="text-[28px] md:text-[36px] font-bold text-text-primary leading-[1.1] tracking-[-0.01em]">
