@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TextScramble } from "./TextScramble";
-import { NodeNetwork } from "./NodeNetwork";
+import { NodeNetworkCanvas } from "./NodeNetworkCanvas";
 import { heroContent } from "../data/siteData";
 import { easeEnter, durCalm, durCinematic } from "../utils/motion-tokens";
 
@@ -67,14 +67,20 @@ export function Hero() {
         }}
       />
 
-      {/* IT node-network: drifting constellation in the empty left area.
-          Sits above the cream veil (z 0) and below the text content (z 10).
-          Hidden on mobile — text fills that space there. */}
+      {/* IT node-network: drifting constellation in the empty left area —
+          now the canvas evolution: denser and mouse-aware (nodes shy away
+          from the cursor). Above the cream veil (z 0), below the text
+          (z 10). Hidden on mobile — text fills that space there. */}
       <div
         className="absolute inset-y-0 left-0 w-1/2 pointer-events-none z-[5] hidden lg:block"
         aria-hidden="true"
       >
-        <NodeNetwork className="w-full h-full" />
+        <NodeNetworkCanvas
+          className="w-full h-full"
+          density={70}
+          color="#5940B8"
+          intensity={0.85}
+        />
       </div>
 
       <motion.div

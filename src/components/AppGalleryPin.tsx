@@ -166,6 +166,7 @@ export function AppGalleryPin() {
 
         <div
           ref={trackRef}
+          data-cursor="drag"
           className="flex gap-6 pl-[max(1.5rem,calc((100vw-1280px)/2+5rem))] pr-24 will-change-transform"
         >
           {boutiqueApps.map((app) => (

@@ -16,6 +16,7 @@ import { Preloader } from "./components/Preloader";
 import { PageTransition } from "./components/PageTransition";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { ScrollProgressBar } from "./components/ScrollProgressBar";
+import { CustomCursor } from "./components/CustomCursor";
 import { HomePage } from "./pages/HomePage";
 import { setLenis } from "./utils/lenis-store";
 
@@ -102,6 +103,7 @@ function App() {
           ActBackground layer (z -1) must not be buried under an opaque
           wrapper background. */}
       <div className={`min-h-screen transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}>
+        <CustomCursor />
         <ScrollProgressBar thickness={3} />
         <Navbar />
         <PageTransition>

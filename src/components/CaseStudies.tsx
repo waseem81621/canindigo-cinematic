@@ -111,6 +111,7 @@ export function CaseStudyCard({
       <motion.button
         ref={cardRef}
         onClick={onClick}
+        data-cursor="view"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className="group relative w-full aspect-[16/10] rounded-2xl overflow-hidden text-left cursor-pointer"

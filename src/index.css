@@ -404,6 +404,12 @@ html[data-theme="dark"] .theme-chrome .pillow-shell a:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Custom cursor — when active, the native cursor yields everywhere. */
+.custom-cursor-active,
+.custom-cursor-active * {
+  cursor: none !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
