@@ -1,13 +1,24 @@
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { footerContent, brand, socialLinks } from "../data/siteData";
 import { SocialIcon } from "./SocialIcons";
 
 /**
- * Ft5 Statement footer — logo + contact block + social links.
+ * Ft5 Statement footer — logo + contact block + social links, closed by an
+ * oversized hollow wordmark that rises into view as the footer reveals
+ * (the credits-card sign-off).
  */
 export function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: footerRef,
+    offset: ["start end", "end end"],
+  });
+  const wordmarkY = useTransform(scrollYProgress, [0.2, 1], ["55%", "12%"]);
+
   return (
-    <footer className="bg-text-primary text-white/60">
+    <footer ref={footerRef} className="bg-text-primary text-white/60 overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 pt-6 md:pt-8 pb-8 md:pb-10">
         {/* Brand + Contact — two-column on md+, stacked on mobile */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 items-center">
@@ -93,6 +104,21 @@ export function Footer() {
           <p className="text-[14px] text-white/50">{footerContent.copyright}</p>
           <p className="text-[14px] text-white/50">{footerContent.registration}</p>
         </div>
+      </div>
+
+      {/* Credits sign-off: hollow wordmark rising from below the fold,
+          baseline bleeding off the page edge. */}
+      <div className="relative h-[11vw] min-h-[90px] -mb-[2vw]" aria-hidden="true">
+        <motion.p
+          style={{
+            y: wordmarkY,
+            color: "transparent",
+            WebkitTextStroke: "1.5px rgba(255,255,255,0.10)",
+          }}
+          className="font-display font-bold text-[14vw] leading-[0.85] text-center whitespace-nowrap select-none"
+        >
+          {brand.name}
+        </motion.p>
       </div>
     </footer>
   );

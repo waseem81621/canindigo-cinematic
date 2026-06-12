@@ -40,17 +40,9 @@ export function HomePage() {
         <ProofChapter />
       </section>
 
-      {/* Act II → III boundary: dawn breaks behind Shuaa. Phase 6 moves the
-          scrub inside the section itself for the full resurface moment. */}
-      <div
-        data-act-boundary="light"
-        data-act-start="top 70%"
-        data-act-end="top 10%"
-        className="h-px"
-        aria-hidden="true"
-      />
-
-      {/* ───────── ACT III — HUMAN ENDING (cream) ───────── */}
+      {/* ───────── THE RESURFACE → ACT III (cream) ─────────
+          Shuaa carries the light boundary itself — dawn breaks across the
+          section's own height ("a ray of light", literally). */}
       <ShuaaProgram />
       <About />
       <Contact />

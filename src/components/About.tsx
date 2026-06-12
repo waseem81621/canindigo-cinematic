@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { MapPin, Award } from "lucide-react";
+import { StatCounter } from "./StatCounter";
 import { aboutContent } from "../data/siteData";
 
 function CounterStat({
@@ -23,11 +24,8 @@ function CounterStat({
       transition={{ duration: 0.7, delay }}
       className="text-center"
     >
-      <p
-        className="text-4xl md:text-5xl font-bold text-text-primary tracking-tight"
-        style={{ fontVariantNumeric: "tabular-nums" }}
-      >
-        {value}
+      <p className="text-4xl md:text-5xl font-bold text-text-primary tracking-tight">
+        <StatCounter value={value} />
       </p>
       <p className="mt-2 text-[12px] text-text-muted uppercase tracking-[0.15em]">
         {label}

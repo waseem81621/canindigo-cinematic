@@ -68,6 +68,15 @@ export function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
           {/* Left: Info */}
           <div>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="font-display text-[17px] md:text-[19px] text-indigo-mid tracking-wide mb-4"
+            >
+              Begin with a conversation.
+            </motion.p>
             <TextReveal
               className="text-[32px] md:text-[48px] lg:text-[56px] font-bold text-text-primary leading-[1.05] tracking-[-0.02em] mb-6"
               delay={0.1}

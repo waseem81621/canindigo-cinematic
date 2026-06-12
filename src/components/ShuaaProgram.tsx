@@ -1,13 +1,43 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import { LineReveal } from "./TextReveal";
 import { shuaaContent } from "../data/siteData";
 
+/**
+ * ShuaaProgram — THE RESURFACE (Act II → Act III).
+ *
+ * Shuaa (شعاع) is Arabic for "a ray of light" — and this section IS the
+ * site's dark→light transition: the section opens continuous with the dark
+ * act, and as the visitor scrolls through it the fixed act layer scrubs
+ * back to cream (the data-act-boundary attributes on the section drive
+ * ActBackground). Dawn breaks while the human story plays. A soft light
+ * beam sweeps across the video card on the same scroll.
+ *
+ * `act-dark` keeps the copy on light tokens and provides the opaque dark
+ * fallback under reduced motion.
+ */
 export function ShuaaProgram() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // The dawn ray: a soft diagonal beam sweeping across the video card as
+  // the section scrolls through the viewport.
+  const beamX = useTransform(scrollYProgress, [0.15, 0.75], ["-80%", "180%"]);
+
   return (
-    <section className="py-20 md:py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-bg-dark" />
+    <section
+      ref={sectionRef}
+      data-act-boundary="light"
+      data-act-start="top 45%"
+      data-act-end="bottom 30%"
+      className="act-dark py-20 md:py-28 relative overflow-hidden"
+    >
       <div
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-25 pointer-events-none"
         style={{
           backgroundImage: `url(${shuaaContent.ambientImage})`,
           backgroundSize: "cover",
@@ -16,7 +46,7 @@ export function ShuaaProgram() {
         }}
       />
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage:
             "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
@@ -26,6 +56,13 @@ export function ShuaaProgram() {
 
       <div className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
         <div className="text-center mb-12 md:mb-16">
+          {/* The narrative key of the whole resurface. */}
+          <LineReveal direction="up">
+            <p className="font-display text-[18px] md:text-[22px] text-indigo-light/90 tracking-wide mb-7">
+              Shuaa — شعاع — &ldquo;a ray of light.&rdquo;
+            </p>
+          </LineReveal>
+
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
             <Sparkles size={14} className="text-indigo-accent" />
             <span className="text-[11px] font-semibold text-white/50 uppercase tracking-[0.15em]">
@@ -61,6 +98,20 @@ export function ShuaaProgram() {
                   >
                     <source src={shuaaContent.videoUrl} type="video/mp4" />
                   </video>
+
+                  {/* The dawn beam — sweeps with the scroll, never blocks
+                      the video controls. */}
+                  <motion.div
+                    aria-hidden="true"
+                    className="absolute inset-y-[-20%] w-[34%] pointer-events-none"
+                    style={{
+                      x: beamX,
+                      rotate: 14,
+                      background:
+                        "linear-gradient(90deg, transparent 0%, rgba(248,246,243,0.13) 45%, rgba(138,109,232,0.10) 55%, transparent 100%)",
+                      filter: "blur(6px)",
+                    }}
+                  />
                 </div>
               </div>
             </motion.div>
