@@ -1,11 +1,14 @@
 import { useState, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { X, ArrowUpRight } from "lucide-react";
-import { StaggerContainer, StaggerItem } from "./AnimatedSection";
 import { TiltCard } from "./TiltCard";
 import { caseStudies } from "../data/siteData";
 
-function CaseStudyModal({
+// 2026-06: the standalone CaseStudies section was absorbed into
+// ProofChapter (Act II's closing scene). This file now exports the card +
+// modal it provides to that chapter.
+
+export function CaseStudyModal({
   study,
   onClose,
 }: {
@@ -88,7 +91,7 @@ function CaseStudyModal({
   );
 }
 
-function CaseStudyCard({
+export function CaseStudyCard({
   study,
   onClick,
 }: {
@@ -206,41 +209,3 @@ function CaseStudyCard({
   );
 }
 
-export function CaseStudies() {
-  const [selectedStudy, setSelectedStudy] = useState<
-    (typeof caseStudies)[0] | null
-  >(null);
-
-  return (
-    // Transparent over ActBackground — sits inside the dark act.
-    <section id="case-studies" className="py-20 md:py-28">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
-        <div className="mb-12 md:mb-16">
-          <h2 className="text-[32px] md:text-[42px] lg:text-[48px] font-semibold text-text-primary leading-[1.1] tracking-[-0.01em] max-w-[600px]">
-            Proof without desperation.
-          </h2>
-        </div>
-
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-          {caseStudies.map((study) => (
-            <StaggerItem key={study.client}>
-              <CaseStudyCard
-                study={study}
-                onClick={() => setSelectedStudy(study)}
-              />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </div>
-
-      <AnimatePresence>
-        {selectedStudy && (
-          <CaseStudyModal
-            study={selectedStudy}
-            onClose={() => setSelectedStudy(null)}
-          />
-        )}
-      </AnimatePresence>
-    </section>
-  );
-}

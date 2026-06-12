@@ -186,12 +186,20 @@ export const detailedServices = [
 ];
 
 // ─── BOUTIQUE APPS ───
-// `image` is the card background screenshot shown in the BoutiqueApps
-// CardDeck. Set to null for any app without a screenshot — the card will
-// fall back to the indigo brand gradient (used for the Coming Soon entry).
+// `image` is the panel background screenshot in the apps gallery. Null
+// falls back to the indigo brand gradient (used for the Coming Soon entry).
+// `pillar` ties each app back to its service pillar — the narrative bridge
+// ("the pillars, in production"). Mapping pending client confirmation.
+export const appsGalleryContent = {
+  eyebrow: "Boutique Platforms",
+  heading: "The pillars, in production.",
+  sub: "Six platforms we built, run, and support — each one a pillar doing real work inside an Omani operation.",
+};
+
 export const boutiqueApps = [
   {
     id: "hr",
+    pillar: "Digital Transformation",
     name: "HR Management",
     subtitle: "Human Resources",
     description:
@@ -205,6 +213,7 @@ export const boutiqueApps = [
   },
   {
     id: "erp",
+    pillar: "Digital Transformation",
     name: "ERP",
     subtitle: "Enterprise Resource Planning",
     description:
@@ -218,6 +227,7 @@ export const boutiqueApps = [
   },
   {
     id: "pms",
+    pillar: "Digital Transformation",
     name: "Property Management",
     subtitle: "Project Management",
     description:
@@ -231,6 +241,7 @@ export const boutiqueApps = [
   },
   {
     id: "zamtech",
+    pillar: "Managed Infrastructure",
     name: "SME Business Suite",
     subtitle: "Field Operations",
     description:
@@ -244,6 +255,7 @@ export const boutiqueApps = [
   },
   {
     id: "fleet",
+    pillar: "Managed Infrastructure",
     name: "Staff & Vehicle Tracking",
     subtitle: "Fleet Management",
     description:
@@ -257,6 +269,7 @@ export const boutiqueApps = [
   },
   {
     id: "vatwps",
+    pillar: "Cybersecurity & Compliance",
     name: "WPS & VAT Suite",
     subtitle: "Compliance Suite",
     description:
@@ -291,6 +304,26 @@ export const caseStudies = [
     accentColor: "var(--color-indigo-mid)",
   },
 ];
+
+// ─── PROOF (Act II closing chapter) ───
+// Sticky-editorial proof section: heading + rolling counters on the left,
+// case-study cards scrolling past on the right. Values that exist on the
+// record today; richer metrics (sites, uptime, tickets) pending from client.
+export const proofContent = {
+  eyebrow: "Track Record",
+  heading: "Proof, on the record.",
+  sub: "Contracts that renew. Systems that stay up. Names that matter in Oman.",
+  stats: [
+    { value: "5", suffix: "-year", label: "Shell Hayat support contract" },
+    { value: "3", suffix: "-year", label: "Oman Broadband managed services" },
+    { value: "OMR 380K+", label: "Active contracts under management" },
+  ],
+  cta: {
+    title: "Your operation next.",
+    sub: "Begin with a confidential consultation.",
+    href: "/#contact",
+  },
+};
 
 // ─── ABOUT ───
 export const aboutContent = {

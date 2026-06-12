@@ -4,8 +4,8 @@ import { ThesisManifesto } from "../components/ThesisManifesto";
 import { TheDescent } from "../components/TheDescent";
 import { VerticalsSelector } from "../components/VerticalsSelector";
 import { Services } from "../components/Services";
-import { BoutiqueApps } from "../components/BoutiqueApps";
-import { CaseStudies } from "../components/CaseStudies";
+import { AppGalleryPin } from "../components/AppGalleryPin";
+import { ProofChapter } from "../components/ProofChapter";
 import { ShuaaProgram } from "../components/ShuaaProgram";
 import { About } from "../components/About";
 import { Contact } from "../components/Contact";
@@ -36,8 +36,8 @@ export function HomePage() {
           links to it. */}
       <section id="ict" className="act-dark">
         <Services />
-        <BoutiqueApps />
-        <CaseStudies />
+        <AppGalleryPin />
+        <ProofChapter />
       </section>
 
       {/* Act II → III boundary: dawn breaks behind Shuaa. Phase 6 moves the
