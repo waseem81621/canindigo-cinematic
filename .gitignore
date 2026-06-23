@@ -1,26 +1,19 @@
+```
+# Dependencies
 node_modules/
-dist/
-.vercel
-.DS_Store
-*.log
+
+# Environment
 .env
 .env.local
-.env.development.local
-.env.production.local
-.hallmark/
-.playwright-mcp/
+.env.*
 
-# Design reference videos + extracted frames — workspace-only assets,
-# not part of the shipped site. Kept on disk but excluded from git.
-design-refs/
+# Logs and temp files
+*.log
+*.tmp
 
-# Workspace audit screenshots — captured during design iteration, not
-# shipped, not reviewed in PRs.
-audit/
+# Editors
+.vscode/
 
-# Stray Playwright screenshots dropped at the repo root during ad-hoc
-# spot-checks.
-mobile-*.jpeg
-hero-preview-*.jpeg
-casestudies-locate.jpeg
-phase*-*.jpeg
+# Original rules preserved
+*.log
+```

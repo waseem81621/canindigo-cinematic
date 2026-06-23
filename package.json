@@ -1,12 +1,37 @@
 {
-  "name": "react-vite-tailwind",
+  "name": "canindigo-oman",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "CanIndigo Oman — Enterprise partner for ICT, interior decoration, and automotive servicing",
+  "author": "CanIndigo Oman",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/canindigo-oman.git"
+  },
+  "keywords": [
+    "ict",
+    "interior-design",
+    "automotive",
+    "oman",
+    "enterprise",
+    "cybersecurity"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src --ext ts,tsx"
+  },
+  "browserslist": [
+    ">0.5%",
+    "last 2 versions",
+    "not dead",
+    "not IE 11"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -30,7 +55,7 @@
     "sharp": "^0.34.5",
     "tailwindcss": "4.1.17",
     "typescript": "5.9.3",
-    "vite": "7.3.2",
+    "vite": "^7.3.5",
     "vite-plugin-singlefile": "2.3.0"
   }
 }
