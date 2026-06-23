@@ -13,7 +13,7 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   MapPin,
 };
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/xvzybjyy";
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT || "https://formspree.io/f/xvzybjyy";
 
 type FormState = {
   name: string;

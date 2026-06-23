@@ -19,6 +19,7 @@ import { ScrollProgressBar } from "./components/ScrollProgressBar";
 import { CustomCursor } from "./components/CustomCursor";
 import { HomePage } from "./pages/HomePage";
 import { setLenis } from "./utils/lenis-store";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 // Route code-split — /interiors, /automotive, and the 404 page are pulled
 // out of the homepage bundle. Wrapped in Suspense at the <Routes> level.
@@ -88,37 +89,50 @@ function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <ScrollToTop />
-      {!loaded && (
-        <Preloader
-          onComplete={() => {
-            setLoaded(true);
-            // The app content was fading in behind the preloader; pins must
-            // re-measure now that the real layout is interactive.
-            ScrollTrigger.refresh();
-          }}
-        />
-      )}
-      {/* No bg here — body carries the cream, and the homepage's fixed
-          ActBackground layer (z -1) must not be buried under an opaque
-          wrapper background. */}
-      <div className={`min-h-screen transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}>
-        <CustomCursor />
-        <ScrollProgressBar thickness={3} />
-        <Navbar />
-        <PageTransition>
-          <Suspense fallback={null}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/interiors" element={<InteriorsPage />} />
-              <Route path="/automotive" element={<AutomotivePage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </Suspense>
-        </PageTransition>
-        <Footer />
-      </div>
+      <ErrorBoundary>
+        <ScrollToTop />
+        {!loaded && (
+          <Preloader
+            onComplete={() => {
+              setLoaded(true);
+              // The app content was fading in behind the preloader; pins must
+              // re-measure now that the real layout is interactive.
+              ScrollTrigger.refresh();
+            }}
+          />
+        )}
+        {/* No bg here — body carries the cream, and the homepage's fixed
+            ActBackground layer (z -1) must not be buried under an opaque
+            wrapper background. */}
+        <div className={`min-h-screen transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"}`}>
+          <CustomCursor />
+          <ScrollProgressBar thickness={3} />
+          <Navbar />
+          <PageTransition>
+            <Suspense fallback={<LoadingFallback />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/interiors" element={<InteriorsPage />} />
+                <Route path="/automotive" element={<AutomotivePage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Suspense>
+          </PageTransition>
+          <Footer />
+        </div>
+      </ErrorBoundary>
     </MotionConfig>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-12 h-12 border-4 border-indigo-accent/20 border-t-indigo-accent rounded-full animate-spin mx-auto mb-4" />
+        <p className="text-text-secondary font-medium">Loading...</p>
+      </div>
+    </div>
   );
 }
 
