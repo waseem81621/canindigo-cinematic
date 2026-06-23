@@ -12,7 +12,7 @@ import { Contact } from "../components/Contact";
 
 export function HomePage() {
   return (
-    <main>
+    <main id="main-content">
       {/* Fixed color layer behind everything — scrubs cream→dark→cream at
           the [data-act-boundary] markers below. */}
       <ActBackground />
